@@ -37,6 +37,6 @@ public class Main {
       server.start();
       LOGGER.info("Server started successfully");
     });
-
   }
+
 }

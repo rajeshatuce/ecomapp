@@ -18,7 +18,13 @@ import org.glassfish.jersey.server.mvc.Viewable;
 public class EComAppController {
 
   private static final String CDN_URL = "CDN_URL";
-  private EComAppUtil eComAppUtil = new EComAppUtil();
+
+  private EComAppUtil eComAppUtil;
+
+  public EComAppController() {
+    this.eComAppUtil = new EComAppUtil();
+  }
+
 
   @GET
   @Produces(MediaType.TEXT_HTML)
