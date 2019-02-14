@@ -26,14 +26,14 @@ public class Main {
               .put("port", 8080)
               .put("features", new JsonArray()
                   .add("org.glassfish.jersey.server.mvc.freemarker.FreemarkerMvcFeature"))
-              .put("packages", new JsonArray()
-                  .add(EComAppController.class.getPackage().getName())));
+              .put("instances", new JsonArray()
+                  .add(EComAppController.class.getCanonicalName())));
 
       // Use a service locator (HK2 or Guice are supported by default) to create the jersey server
       ServiceLocator locator = ServiceLocatorUtilities
           .bind(new HK2JerseyBinder(), new HK2VertxBinder(vertx));
       JerseyServer server = locator.getService(JerseyServer.class);
-      // Start the server which simply returns "Hello World!" to each GET request.
+      // Start the server
       server.start();
       LOGGER.info("Server started successfully");
     });

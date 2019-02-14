@@ -1,6 +1,10 @@
 package com.rt.controller;
 
+import static com.rt.constant.EComAppConstant.CDN_URL;
+
+import com.google.inject.Inject;
 import com.rt.util.EComAppUtil;
+import com.rt.util.EComAppUtilImpl;
 import io.vertx.core.Vertx;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,12 +21,11 @@ import org.glassfish.jersey.server.mvc.Viewable;
 @Path("/")
 public class EComAppController {
 
-  private static final String CDN_URL = "CDN_URL";
-
   private EComAppUtil eComAppUtil;
 
+  @Inject
   public EComAppController() {
-    this.eComAppUtil = new EComAppUtil();
+    this.eComAppUtil = new EComAppUtilImpl();
   }
 
 
