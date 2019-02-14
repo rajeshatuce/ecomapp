@@ -32,6 +32,9 @@ public class Main {
     LOGGER.info("Server started successfully");
   }
 
+  /**
+   * utility api to load environment specific properties file
+   */
   private static Properties loadEnvironmentPropertyFile(String arg) throws IOException {
     String propertyFile = String.format("application_%s.properties", arg.toLowerCase());
     Properties prop = new Properties();
