@@ -6,4 +6,15 @@ public class EComAppUtilImpl implements EComAppUtil {
     return "http://localhost:8081/images/";
   }
 
+  @Override
+  public String getEComCDNUrlForJS() {
+    return "http://localhost:8081/js/";
+  }
+
+  @Override
+  public String getEComCDNUrlForCSS() {
+    return "http://localhost:8081/css/";
+  }
+
+
 }

@@ -4,4 +4,8 @@ public interface EComAppUtil {
 
   String getEComCDNUrlForImages();
 
+  String getEComCDNUrlForJS();
+
+  String getEComCDNUrlForCSS();
+
 }
