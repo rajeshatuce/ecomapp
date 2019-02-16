@@ -39,10 +39,6 @@ input.ecom-search[type=text]:focus {
   display: inline;
 }
 
-.shopNowBtn {
-  display: inline;
-}
-
 @media only screen and (max-width: 450px) {
   .ecomapp-hellouser {
     display: none;

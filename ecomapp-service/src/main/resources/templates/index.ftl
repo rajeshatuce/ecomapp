@@ -3,6 +3,7 @@
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
@@ -20,8 +21,9 @@
                                                name="search" placeholder="Search..">
       <i class="fa fa-search"></i></p>
     </div>
-    <div class="w3-col s4 w3-center">
+    <div class="w3-col s4 w3-right">
     <p class="w3-right">
+      <i class='fas fa-user'></i><span class="ecomapp-hellouser"> Hello,<span id="shortUserName"> Rajesh</span></span>
       <i class="fa fa-shopping-cart w3-margin-right"></i>
     </p>
     </div>
@@ -34,7 +36,8 @@
       <h1 class="w3-jumbo w3-hide-small">New arrivals</h1>
       <h1 class="w3-hide-large w3-hide-medium">New arrivals</h1>
       <h1 class="w3-hide-small">COLLECTION 2016</h1>
-      <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large">SHOP NOW</a></p>
+      <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large shopNowBtn">SHOP
+        NOW</a></p>
     </div>
   </div>
 

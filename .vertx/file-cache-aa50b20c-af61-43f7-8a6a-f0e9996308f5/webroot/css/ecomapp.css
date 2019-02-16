@@ -31,25 +31,9 @@ body {
 }
 
 input.ecom-search[type=text]:focus {
-  width: 60%;
+  width: 75%;
 }
 
-.ecomapp-hellouser {
+.ecomapp-11px {
   font-size: 11px;
-  display: inline;
-}
-
-.shopNowBtn {
-  display: inline;
-}
-
-@media only screen and (max-width: 450px) {
-  .ecomapp-hellouser {
-    display: none;
-    font-size: 11px;
-  }
-
-  .shopNowBtn {
-    display: none;
-  }
 }
