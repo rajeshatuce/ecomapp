@@ -31,5 +31,5 @@ body {
 }
 
 input.ecom-search[type=text]:focus {
-  width: 75%;
+  width: 100%;
 }

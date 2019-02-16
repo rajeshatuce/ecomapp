@@ -15,11 +15,16 @@
 <div class="w3-main">
   <!-- Top header -->
   <header class="fixed-top w3-container w3-xlarge">
-    <p class="w3-left"><b>LOGO</b></p>
+    <div class="w3-col s4 w3-center"><p class="w3-left"><b>LOGO</b></p></div>
+    <div class="w3-col s4 w3-center"><p><input id="search" class="ecom-search" type="text"
+                                               name="search" placeholder="Search..">
+      <i class="fa fa-search"></i></p>
+    </div>
+    <div class="w3-col s4 w3-center">
     <p class="w3-right">
       <i class="fa fa-shopping-cart w3-margin-right"></i>
-      <i class="fa fa-search"></i>
     </p>
+    </div>
   </header>
 
   <!-- Image header -->
