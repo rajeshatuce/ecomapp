@@ -5,15 +5,3 @@
 body, h1, h2, h3, h4, h5, h6, .w3-wide {
   font-family: "Montserrat", sans-serif;
 }
-
-body {
-  padding-top: 70px;
-}
-
-.fixed-top {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background: #fff;
-  z-index: 15000;
-}
