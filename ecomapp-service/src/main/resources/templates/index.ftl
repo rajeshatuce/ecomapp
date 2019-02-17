@@ -24,7 +24,8 @@
     <div class="w3-col s4 w3-right">
     <p class="w3-right">
       <i class='fas fa-user'></i><span class="ecomapp-hellouser"> Hello,<span id="shortUserName"> Rajesh</span></span>
-      <i class="fa fa-shopping-cart w3-margin-right"></i>
+      <i class="fa fa-shopping-cart"></i>
+      <span class="w3-badge w3-small w3-right w3-black">3</span>
     </p>
     </div>
   </header>
