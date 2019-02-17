@@ -19,10 +19,7 @@ function w3_close() {
   document.getElementById("myOverlay").style.display = "none";
 }
 
-/*
- *
- * Java script function for image slide show
- */
+//----------------
 var slideIndex = 1;
 showDivs(slideIndex);
 

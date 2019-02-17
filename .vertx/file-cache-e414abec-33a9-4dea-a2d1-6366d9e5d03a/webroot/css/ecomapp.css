@@ -58,12 +58,8 @@ input.ecom-search[type=text]:focus {
   }
 }
 
+/*         */
 /* Slideshow container */
 .mySlides {
   display: none
-}
-
-/* star color */
-.checked {
-  color: orange;
 }
