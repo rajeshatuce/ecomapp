@@ -34,27 +34,37 @@
   <div class="w3-display-container w3-container">
     <img src="${CDN_IMG_URL}jeans.jpg" alt="Jeans" style="width:100%">
     <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
-      <h1 class="w3-jumbo w3-hide-small">New arrivals</h1>
-      <h1 class="w3-hide-large w3-hide-medium">New arrivals</h1>
-      <h1 class="w3-hide-small">COLLECTION 2016</h1>
-      <p><a href="#jeans" class="w3-button w3-black w3-padding-large w3-large shopNowBtn">SHOP
+      <h1 class="w3-jumbo w3-hide-small">New Arrivals</h1>
+      <h1 class="w3-hide-large w3-hide-medium">New Arrivals</h1>
+      <h1 class="w3-hide-small">COLLECTION 2019</h1>
+      <p><a href="#products" class="w3-button w3-black w3-padding-large w3-large shopNowBtn">SHOP
         NOW</a></p>
     </div>
   </div>
-
-  <div class="w3-container w3-text-grey" id="jeans">
-    <p>8 items</p>
+  <!-- Product section -->
+  <div class="w3-container w3-text-grey" id="products">
+    <p id="productGroup">Jeans</p>
   </div>
 
   <!-- Product grid -->
   <div class="w3-row w3-grayscale">
     <div class="w3-col l3 s6">
       <div class="w3-container">
-        <img src="${CDN_IMG_URL}jeans1.jpg" style="width:100%">
+        <div class="w3-display-container">
+          <img src="${CDN_IMG_URL}jeans1.jpg" class="products-width">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
         <p>Ripped Skinny Jeans<br><b>$24.99</b></p>
       </div>
       <div class="w3-container">
-        <img src="${CDN_IMG_URL}jeans2.jpg" style="width:100%">
+        <div class="w3-display-container">
+          <img src="${CDN_IMG_URL}jeans3.jpg" class="products-width">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
         <p>Mega Ripped Jeans<br><b>$19.99</b></p>
       </div>
     </div>
@@ -62,7 +72,7 @@
     <div class="w3-col l3 s6">
       <div class="w3-container">
         <div class="w3-display-container">
-          <img src="${CDN_IMG_URL}jeans2.jpg" style="width:100%">
+          <img src="${CDN_IMG_URL}jeans2.jpg" class="products-width">
           <span class="w3-tag w3-display-topleft">New</span>
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
@@ -71,35 +81,54 @@
         <p>Mega Ripped Jeans<br><b>$19.99</b></p>
       </div>
       <div class="w3-container">
-        <img src="${CDN_IMG_URL}jeans3.jpg" style="width:100%">
-        <p>Washed Skinny Jeans<br><b>$20.50</b></p>
-      </div>
-    </div>
-
-    <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <img src="${CDN_IMG_URL}jeans3.jpg" style="width:100%">
-        <p>Washed Skinny Jeans<br><b>$20.50</b></p>
-      </div>
-      <div class="w3-container">
         <div class="w3-display-container">
-          <img src="${CDN_IMG_URL}jeans4.jpg" style="width:100%">
-          <span class="w3-tag w3-display-topleft">Sale</span>
+          <img src="${CDN_IMG_URL}jeans3.jpg" class="products-width">
           <div class="w3-display-middle w3-display-hover">
             <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
           </div>
         </div>
-        <p>Vintage Skinny Jeans<br><b class="w3-text-red">$14.99</b></p>
+        <p>Washed Skinny Jeans<br><b>$20.50</b></p>
       </div>
     </div>
 
     <div class="w3-col l3 s6">
       <div class="w3-container">
-        <img src="${CDN_IMG_URL}jeans4.jpg" style="width:100%">
+        <div class="w3-display-container">
+          <img src="${CDN_IMG_URL}jeans4.jpg" class="products-width">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <p>Washed Skinny Jeans<br><b>$20.50</b></p>
+      </div>
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="${CDN_IMG_URL}jeans5.jpg" class="products-width">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
+        <p>Vintage Skinny Jeans<br><b>$14.99</b></p>
+      </div>
+    </div>
+
+    <div class="w3-col l3 s6">
+      <div class="w3-container">
+        <div class="w3-display-container">
+          <img src="${CDN_IMG_URL}jeans1.jpg" class="products-width">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
         <p>Vintage Skinny Jeans<br><b>$14.99</b></p>
       </div>
       <div class="w3-container">
-        <img src="${CDN_IMG_URL}jeans1.jpg" style="width:100%">
+        <div class="w3-display-container">
+          <img src="${CDN_IMG_URL}jeans2.jpg" class="products-width">
+          <div class="w3-display-middle w3-display-hover">
+            <button class="w3-button w3-black">Buy now <i class="fa fa-shopping-cart"></i></button>
+          </div>
+        </div>
         <p>Ripped Skinny Jeans<br><b>$24.99</b></p>
       </div>
     </div>
@@ -165,9 +194,12 @@
     </div>
   </footer>
 
-  <div class="w3-black w3-center w3-padding-24">Powered by <a
-      href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank"
-      class="w3-hover-opacity">w3.css</a></div>
+  <div class="w3-black w3-center w3-padding-24">&copy;2019
+    <a
+        href="" title="LOGO" target="_blank"
+        class="w3-hover-opacity">LOGO</a>
+    . All rights reserved.
+  </div>
 
   <!-- End page content -->
 </div>
