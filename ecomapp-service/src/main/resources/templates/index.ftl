@@ -22,11 +22,28 @@
       <i class="fa fa-search"></i></p>
     </div>
     <div class="w3-col s4 w3-right">
-    <p class="w3-right">
-      <i class='fas fa-user'></i><span class="ecomapp-hellouser"> Hello,<span id="shortUserName"> Rajesh</span></span>
-      <i class="fa fa-shopping-cart"></i>
-      <span class="w3-badge w3-small w3-right w3-black">3</span>
-    </p>
+      <div class="w3-right header-rightdiv">
+        <div class="dropdown" style="display:inline;">
+          <i class='fas fa-user w3-hover-opacity'></i><span class="ecomapp-hellouser"> Hello,<span
+            id="shortUserName"> Rajesh</span></span>
+          <div class="dropdown-content w3-hover-shadow">
+            <a href="#">My Account</a>
+            <a href="#">My Orders</a>
+            <a href="#">Customer Service</a>
+            <a href="#">Logout</a>
+          </div>
+        </div>
+
+        <div class="dropdown" style="display:inline;">
+          <i class="fa fa-shopping-cart w3-hover-opacity dropbtn"></i>
+          <span class="w3-badge w3-small w3-right w3-black">3</span>
+          <div class="dropdown-content w3-hover-shadow">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 2</a>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
