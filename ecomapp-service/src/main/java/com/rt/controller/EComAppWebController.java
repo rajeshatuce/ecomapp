@@ -1,5 +1,7 @@
 package com.rt.controller;
 
+import static com.rt.constant.EComAppConstant.ECOMAPP_HOMEPAGE;
+
 import com.rt.util.EComAppCDNUrlBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +29,6 @@ public class EComAppWebController {
   public String getEComAppIndexPage(Model model) {
     eComAppCDNUrlBuilder.addCDNUrlToModel(model);
     LOGGER.info("Rendering homepage");
-    return "index";
+    return ECOMAPP_HOMEPAGE;
   }
 }
