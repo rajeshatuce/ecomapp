@@ -139,7 +139,8 @@
     </div>
     <div class="w3-row">
       <div class="w3-right">
-        <button class="w3-btn w3-white w3-border w3-border-red w3-round-large fa fa-plus-square">ADD
+        <button class="w3-btn w3-white w3-border w3-border-red w3-round-large fa fa-plus-square"
+                onclick="document.getElementById('addNewAddress').style.display='block'">ADD
           NEW ADDRESS
         </button>
       </div>

@@ -3,7 +3,7 @@
 <#import "ecomapp_product_payment_section.ftl" as product_payment>
 <#import "../common/ecomapp_sub_footer_section.ftl" as sub_footer_section>
 <#import "../common/ecomapp_footer.ftl" as footer>
-
+<#import "ecomapp_add_new_address_modal.ftl" as add_new_address_modal>
 <@page.ecomapp_page>
 
 <!-- !PAGE CONTENT! -->
@@ -19,4 +19,6 @@
   <@footer.ecomapp_footer/>
   <!-- End page content -->
 </div>
+<!-- Add New Address Modal -->
+  <@add_new_address_modal.ecomapp_add_new_address_modal/>
 </@page.ecomapp_page>
