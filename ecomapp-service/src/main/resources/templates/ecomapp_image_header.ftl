@@ -1,5 +1,5 @@
 <#macro ecomapp_image_header>
-    <div class="w3-display-container w3-container">
+    <div class="w3-display-container w3-container ecomapp-margin-top-28px">
       <img src="${CDN_IMG_URL}jeans.jpg" alt="Jeans" style="width:100%">
       <div class="w3-display-topleft w3-text-white" style="padding:24px 48px">
         <h1 class="w3-jumbo w3-hide-small">New Arrivals</h1>

@@ -1,5 +1,5 @@
 <#macro ecomapp_top_header>
-  <header class="fixed-top w3-container w3-xlarge">
+  <header class="fixed-top w3-container w3-xlarge w3-border-bottom">
     <div class="w3-col s4 w3-center"><p class="w3-left"><b>LOGO</b></p></div>
     <div class="w3-col s4 w3-center"><p><input id="search" class="ecom-search" type="text"
                                                name="search" placeholder="Search..">

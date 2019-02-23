@@ -1,5 +1,6 @@
 package com.rt.controller;
 
+import static com.rt.constant.EComAppConstant.ECOMAPP_CHECKOUT_PAGE;
 import static com.rt.constant.EComAppConstant.ECOMAPP_HOMEPAGE;
 
 import com.rt.util.EComAppCDNUrlBuilder;
@@ -30,5 +31,12 @@ public class EComAppWebController {
     eComAppCDNUrlBuilder.addCDNUrlToModel(model);
     LOGGER.info("Rendering homepage");
     return ECOMAPP_HOMEPAGE;
+  }
+
+  @RequestMapping("/checkout")
+  public String getEComAppCheckoutPage(Model model) {
+    eComAppCDNUrlBuilder.addCDNUrlToModel(model);
+    LOGGER.info("Rendering checkout page");
+    return ECOMAPP_CHECKOUT_PAGE;
   }
 }

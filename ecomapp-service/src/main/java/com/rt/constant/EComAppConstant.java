@@ -11,4 +11,5 @@ public class EComAppConstant {
 
 
   public static final String ECOMAPP_HOMEPAGE = "ecomapp_homepage";
+  public static final String ECOMAPP_CHECKOUT_PAGE = "ecomapp_checkout_page";
 }

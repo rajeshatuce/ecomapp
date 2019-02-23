@@ -50,4 +50,5 @@
       </div>
     </div>
   </div>
+  <script src="${CDN_JS_URL}ecomapp_image_slideshow.js"></script>
 </#macro>
