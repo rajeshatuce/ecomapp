@@ -1,11 +1,11 @@
-<#import "ecomapp_page.ftl" as page>
+<#import "../common/ecomapp_page.ftl" as page>
 <#import "ecomapp_product_details_modal.ftl" as product_details>
-<#import "ecomapp_top_header.ftl" as top_header>
+<#import "../common/ecomapp_top_header.ftl" as top_header>
 <#import "ecomapp_image_header.ftl" as image_header>
 <#import "ecomapp_product_section.ftl" as product_section>
 <#import "ecomapp_subscribe_section.ftl" as subscribe_section>
-<#import "ecomapp_sub_footer_section.ftl" as sub_footer_section>
-<#import "ecomapp_footer.ftl" as footer>
+<#import "../common/ecomapp_sub_footer_section.ftl" as sub_footer_section>
+<#import "../common/ecomapp_footer.ftl" as footer>
 
 <@page.ecomapp_page>
 

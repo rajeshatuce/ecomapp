@@ -3,7 +3,7 @@
     <div class="w3-col s4 w3-center"><p class="w3-left"><b>LOGO</b></p></div>
     <div class="w3-col s4 w3-center"><p><input id="search" class="ecom-search" type="text"
                                                name="search" placeholder="Search..">
-      <i class="fa fa-search"></i></p>
+      <i class="fa fa-search w3-hover-opacity"></i></p>
     </div>
     <div class="w3-col s4 w3-right">
       <div class="w3-right header-rightdiv">

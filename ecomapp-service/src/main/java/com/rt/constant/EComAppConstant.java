@@ -10,6 +10,6 @@ public class EComAppConstant {
   public static final String CDN_CSS_URL = "CDN_CSS_URL";
 
 
-  public static final String ECOMAPP_HOMEPAGE = "ecomapp_homepage";
-  public static final String ECOMAPP_CHECKOUT_PAGE = "ecomapp_checkout_page";
+  public static final String ECOMAPP_HOMEPAGE = "homepage/ecomapp_homepage";
+  public static final String ECOMAPP_CHECKOUT_PAGE = "checkout_page/ecomapp_checkout_page";
 }

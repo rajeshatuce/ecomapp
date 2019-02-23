@@ -1,8 +1,8 @@
-<#import "ecomapp_page.ftl" as page>
-<#import "ecomapp_top_header.ftl" as top_header>
+<#import "../common/ecomapp_page.ftl" as page>
+<#import "../common/ecomapp_top_header.ftl" as top_header>
 <#import "ecomapp_product_payment_section.ftl" as product_payment>
-<#import "ecomapp_sub_footer_section.ftl" as sub_footer_section>
-<#import "ecomapp_footer.ftl" as footer>
+<#import "../common/ecomapp_sub_footer_section.ftl" as sub_footer_section>
+<#import "../common/ecomapp_footer.ftl" as footer>
 
 <@page.ecomapp_page>
 
