@@ -43,7 +43,9 @@
               <option value="3">3</option>
             </select>
             <p>
-              <button class="w3-button w3-black w3-round-xlarge">Add to Cart</button>
+              <button class="w3-btn w3-round-xxlarge w3-red w3-hover-green fa fa-thumbs-up">Add to
+                Cart
+              </button>
             </p>
           </div>
         </div>

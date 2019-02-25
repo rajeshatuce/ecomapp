@@ -11,10 +11,10 @@
           <i class='fas fa-user w3-hover-opacity'></i><span class="ecomapp-hellouser"> Hello,<span
             id="shortUserName"> Rajesh</span></span>
           <div class="dropdown-content w3-hover-shadow">
-            <a href="#">My Account</a>
-            <a href="#">My Orders</a>
-            <a href="#">Customer Service</a>
-            <a href="#">Logout</a>
+            <a href="#" class="w3-border-bottom">My Account</a>
+            <a href="#" class="w3-border-bottom">My Orders</a>
+            <a href="#" class="w3-border-bottom">Customer Service</a>
+            <a href="#" class="w3-border-bottom">Logout</a>
           </div>
         </div>
 
