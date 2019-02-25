@@ -1,9 +1,9 @@
 <#macro ecomapp_add_new_address_modal>
   <div id="addNewAddress" class="w3-modal">
-    <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
+    <div class="w3-modal-content w3-animate-zoom ecomapp-modal-padding">
       <div class="w3-container w3-white w3-center">
         <i onclick="document.getElementById('addNewAddress').style.display='none'"
-           class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
+           class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge ecomapp-color-white"></i>
         <div class="w3-card-4">
           <div class="w3-container w3-dark-grey">
             <h3 class="w3-left">Delivery Address</h3>

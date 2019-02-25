@@ -1,6 +1,6 @@
 <#macro product_details_modal>
   <div id="productDetails" class="w3-modal">
-    <div class="w3-modal-content w3-animate-zoom" style="padding:32px">
+    <div class="w3-modal-content w3-animate-zoom ecomapp-modal-padding">
       <div class="w3-container w3-white w3-center">
         <i onclick="document.getElementById('productDetails').style.display='none'"
            class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
