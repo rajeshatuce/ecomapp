@@ -16,9 +16,9 @@
               </label>
             </p>
             <div class="w3-row w3-center w3-padding-32">
-              <button class="w3-btn w3-round-xxlarge w3-red w3-hover-green fa fa-check">No
+              <button class="w3-btn w3-round-xxlarge w3-red w3-hover-green w3-ripple fa fa-check">No
               </button>
-              <button class="w3-btn w3-white w3-border w3-round-xxlarge fa fa-close">Yes
+              <button class="w3-btn w3-white w3-border w3-round-xxlarge w3-ripple fa fa-close">Yes
               </button>
             </div>
           </form>

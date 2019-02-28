@@ -12,7 +12,7 @@
             id="shortUserName"> Rajesh</span></span>
           <div class="dropdown-content w3-hover-shadow">
             <a href="#" class="w3-border-bottom">My Account</a>
-            <a href="#" class="w3-border-bottom">My Orders</a>
+            <a href="myOrders" class="w3-border-bottom">My Orders</a>
             <a href="#" class="w3-border-bottom">Customer Service</a>
             <a href="#" class="w3-border-bottom">Logout</a>
           </div>

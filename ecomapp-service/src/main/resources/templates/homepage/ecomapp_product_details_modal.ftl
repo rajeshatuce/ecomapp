@@ -12,9 +12,11 @@
               <img class="mySlides" src="${CDN_IMG_URL}jeans3.jpg" style="width:100%">
               <img class="mySlides" src="${CDN_IMG_URL}jeans4.jpg" style="width:100%">
 
-              <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;
+              <button class="w3-button w3-black w3-ripple w3-display-left" onclick="plusDivs(-1)">
+                &#10094;
               </button>
-              <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;
+              <button class="w3-button w3-black w3-ripple w3-display-right" onclick="plusDivs(1)">
+                &#10095;
               </button>
             </div>
           </div>
@@ -43,7 +45,9 @@
               <option value="3">3</option>
             </select>
             <p>
-              <button class="w3-btn w3-round-xxlarge w3-red w3-hover-green fa fa-thumbs-up">Add to
+              <button
+                  class="w3-btn w3-round-xxlarge w3-red w3-hover-green w3-ripple fa fa-thumbs-up">
+                Add to
                 Cart
               </button>
             </p>

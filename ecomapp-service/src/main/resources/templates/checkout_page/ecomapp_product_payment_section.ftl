@@ -84,7 +84,7 @@
     <!-- Empty Cart and Total Amount-->
     <div class="w3-row">
       <div class="w3-quarter w3-section w3-padding-small">
-        <button class="w3-btn w3-white w3-border w3-border-red w3-round-large fa fa-trash"
+        <button class="w3-btn w3-white w3-border w3-border-red w3-round-large w3-ripple fa fa-trash"
                 onclick="document.getElementById('emptyCartModal').style.display='block'">EMPTY
           CART
         </button>
@@ -140,8 +140,9 @@
     </div>
     <div class="w3-row">
       <div class="w3-right">
-        <button class="w3-btn w3-white w3-border w3-border-red w3-round-large fa fa-plus-square"
-                onclick="document.getElementById('addNewAddress').style.display='block'">ADD
+        <button
+            class="w3-btn w3-white w3-border w3-border-red w3-round-large w3-ripple fa fa-plus-square"
+            onclick="document.getElementById('addNewAddress').style.display='block'">ADD
           NEW ADDRESS
         </button>
       </div>
@@ -166,7 +167,7 @@
             </div>
           </div>
         </div>
-        <button class="w3-button w3-block w3-dark-grey">DELIVER HERE</button>
+        <button class="w3-button w3-block w3-ripple w3-dark-grey">DELIVER HERE</button>
       </div>
       <div class="w3-card-4 w3-col l3 s6 w3-margin" style="min-width: 230px;">
         <header class="w3-container w3-light-grey">
@@ -187,7 +188,7 @@
             </div>
           </div>
         </div>
-        <button class="w3-button w3-block w3-dark-grey">DELIVER HERE</button>
+        <button class="w3-button w3-block w3-ripple w3-dark-grey">DELIVER HERE</button>
       </div>
       <div class="w3-card-4 w3-col l3 s6 w3-margin" style="min-width: 230px;">
         <header class="w3-container w3-light-grey">
@@ -209,7 +210,7 @@
             </div>
           </div>
         </div>
-        <button class="w3-button w3-block w3-dark-grey">DELIVER HERE</button>
+        <button class="w3-button w3-block w3-ripple w3-dark-grey">DELIVER HERE</button>
       </div>
     </div>
   </div>
@@ -232,9 +233,11 @@
   <!-- Place Order/ Cancel Order button-->
   <div class="w3-container ecomapp-margin-top-28px w3-margin-bottom">
     <div class="w3-row w3-center">
-      <button class="w3-btn w3-white w3-border w3-round-xxlarge fa fa-thumbs-down">Cancel Order
+      <button class="w3-btn w3-white w3-border w3-round-xxlarge w3-ripple fa fa-thumbs-down">Cancel
+        Order
       </button>
-      <button class="w3-btn w3-round-xxlarge w3-red w3-hover-green fa fa-thumbs-up">Place Order
+      <button class="w3-btn w3-round-xxlarge w3-red w3-hover-green w3-ripple fa fa-thumbs-up">Place
+        Order
       </button>
     </div>
   </div>

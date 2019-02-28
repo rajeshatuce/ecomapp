@@ -49,9 +49,10 @@
               <label class="w3-left"><b>State:</b></label>
               <input class="w3-input w3-border" name="state" type="text"></p>
             <div class="w3-row w3-center w3-margin">
-              <button class="w3-btn w3-white w3-border w3-round-xxlarge fa fa-close">Clear
+              <button class="w3-btn w3-white w3-border w3-round-xxlarge w3-ripple fa fa-close">Clear
               </button>
-              <button class="w3-btn w3-round-xxlarge w3-red w3-hover-green fa fa-check">Submit
+              <button class="w3-btn w3-round-xxlarge w3-red w3-hover-green w3-ripple fa fa-check">
+                Submit
               </button>
             </div>
           </form>

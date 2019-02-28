@@ -13,7 +13,7 @@
                     required></p>
           <p><input class="w3-input w3-border" type="text" placeholder="Message" name="Message"
                     required></p>
-          <button type="submit" class="w3-button w3-block w3-black">Send</button>
+          <button type="submit" class="w3-button w3-block w3-ripple w3-black">Send</button>
         </form>
       </div>
 

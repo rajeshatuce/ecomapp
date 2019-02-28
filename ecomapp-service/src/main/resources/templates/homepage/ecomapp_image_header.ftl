@@ -5,7 +5,8 @@
         <h1 class="w3-jumbo w3-hide-small">New Arrivals</h1>
         <h1 class="w3-hide-large w3-hide-medium">New Arrivals</h1>
         <h1 class="w3-hide-small">COLLECTION 2019</h1>
-        <p><a href="#products" class="w3-button w3-black w3-padding-large w3-large shopNowBtn">SHOP
+        <p><a href="#products"
+              class="w3-button w3-black w3-padding-large w3-large w3-ripple shopNowBtn">SHOP
           NOW</a></p>
       </div>
     </div>

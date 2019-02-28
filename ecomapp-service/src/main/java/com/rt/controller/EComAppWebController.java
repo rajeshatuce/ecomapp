@@ -2,6 +2,7 @@ package com.rt.controller;
 
 import static com.rt.constant.EComAppConstant.ECOMAPP_CHECKOUT_PAGE;
 import static com.rt.constant.EComAppConstant.ECOMAPP_HOMEPAGE;
+import static com.rt.constant.EComAppConstant.ECOMAPP_MY_ORDERS_PAGE;
 
 import com.rt.util.EComAppCDNUrlBuilder;
 import org.slf4j.Logger;
@@ -38,5 +39,12 @@ public class EComAppWebController {
     eComAppCDNUrlBuilder.addCDNUrlToModel(model);
     LOGGER.info("Rendering checkout page");
     return ECOMAPP_CHECKOUT_PAGE;
+  }
+
+  @RequestMapping("/myOrders")
+  public String getEComAppMyOrdersPage(Model model) {
+    eComAppCDNUrlBuilder.addCDNUrlToModel(model);
+    LOGGER.info("Rendering my orders page");
+    return ECOMAPP_MY_ORDERS_PAGE;
   }
 }
