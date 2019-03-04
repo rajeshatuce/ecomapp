@@ -8,13 +8,20 @@
     <div class="w3-col s4 w3-right">
       <div class="w3-right header-rightdiv">
         <div class="dropdown" style="display:inline;">
-          <i class='fas fa-user w3-hover-opacity'></i><span class="ecomapp-hellouser"> Hello,<span
-            id="shortUserName"> Rajesh</span></span>
-          <div class="dropdown-content w3-hover-shadow">
+          <i class='fas fa-user w3-hover-opacity'></i>
+          <span class="ecomapp-hellouser"> Hi,
+            <span id="shortUserName" ng-show="!user"> User</span>
+            <span id="shortUserName"
+                  ng-show="user"> {{user.userAuthentication.details.given_name}}</span>
+          </span>
+          <div class="dropdown-content w3-hover-shadow w3-border" ng-show="!user">
+            <a href="/google/login" class="w3-border-bottom">Login</a>
+          </div>
+          <div class="dropdown-content w3-hover-shadow w3-border" ng-show="user">
             <a href="#" class="w3-border-bottom">My Account</a>
             <a href="myOrders" class="w3-border-bottom">My Orders</a>
             <a href="#" class="w3-border-bottom">Customer Service</a>
-            <a href="#" class="w3-border-bottom">Logout</a>
+            <a href="/" class="w3-border-bottom" ng-click="logout()">Logout</a>
           </div>
         </div>
 

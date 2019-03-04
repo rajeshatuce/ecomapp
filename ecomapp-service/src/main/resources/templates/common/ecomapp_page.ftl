@@ -11,10 +11,12 @@
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="${CDN_CSS_URL}ecomapp.css">
-  <body>
+  <body ng-app="ecomapp" ng-controller="ecomappCtrl" ng-cloak>
   <#-- This processes the enclosed content:  -->
     <#nested>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
   <script src="${CDN_JS_URL}ecomapp.js"></script>
+  <script src="${CDN_JS_URL}ecomapp_controller.js"></script>
   </body>
   </html>
 </#macro>

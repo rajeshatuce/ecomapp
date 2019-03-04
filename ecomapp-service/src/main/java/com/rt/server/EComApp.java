@@ -4,12 +4,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 
 /**
  * EComApp main class for ecomapp
  */
 
 @SpringBootApplication(scanBasePackages = {"com.rt"})
+@EnableOAuth2Sso // Without this, basic authentication is invoked
 public class EComApp {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(EComApp.class);
