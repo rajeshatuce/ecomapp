@@ -5,7 +5,7 @@
                                                name="search" placeholder="Search..">
       <i class="fa fa-search w3-hover-opacity"></i></p>
     </div>
-    <div class="w3-col s4 w3-right">
+    <div class="w3-col s4 w3-right topRightMenuPositionFix">
       <div class="w3-right header-rightdiv">
         <div class="dropdown" style="display:inline;">
           <i class='fas fa-user w3-hover-opacity'></i>
@@ -14,10 +14,14 @@
             <span id="shortUserName"
                   ng-show="user"> {{user.userAuthentication.details.given_name}}</span>
           </span>
-          <div class="dropdown-content w3-hover-shadow w3-border" ng-show="!user">
+          <div class="dropdown-content w3-hover-shadow w3-border topHeaderMenuPositionFix"
+               ng-show="!user">
+            <a href="/" class="w3-border-bottom">Home</a>
             <a href="/google/login" class="w3-border-bottom">Login</a>
           </div>
-          <div class="dropdown-content w3-hover-shadow w3-border" ng-show="user">
+          <div class="dropdown-content w3-hover-shadow w3-border topHeaderMenuPositionFix"
+               ng-show="user">
+            <a href="/" class="w3-border-bottom">Home</a>
             <a href="#" class="w3-border-bottom">My Account</a>
             <a href="myOrders" class="w3-border-bottom">My Orders</a>
             <a href="#" class="w3-border-bottom">Customer Service</a>
@@ -28,7 +32,7 @@
         <div class="dropdown" style="display:inline;">
           <i class="fa fa-shopping-cart w3-hover-opacity dropbtn"></i>
           <span class="w3-badge w3-small w3-right w3-black">3</span>
-          <div class="dropdown-content">
+          <div class="dropdown-content  w3-hover-shadow w3-border topHeaderMenuPositionFix">
             <div class="w3-row">
               <div class="w3-container mycart">
                 <ul class="w3-ul w3-card-4">
@@ -154,7 +158,8 @@
               </div>
             </div>
             <div class="w3-row w3-right">
-              <button class="payment_button"><span>Rs. 2012.45</span></button>
+              <button class="payment_button" ng-click="checkoutShoppingCart()">
+                <span>Rs. 2012.45</span></button>
             </div>
           </div>
         </div>

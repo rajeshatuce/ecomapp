@@ -177,3 +177,15 @@ input.ecom-search[type=text]:focus {
 .ecomapp-color-white {
   color: white;
 }
+
+/* CSS fix for IE for top header */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  .topRightMenuPositionFix {
+    position: relative;
+    top: 20px;
+  }
+
+  .topHeaderMenuPositionFix {
+    top: 30px;
+  }
+}

@@ -20,4 +20,8 @@ app.controller('ecomappCtrl', function ($http, $scope) {
       console.log("Logout error : ", error);
     });
   };
+  //method for checkout shopping cart
+  $scope.checkoutShoppingCart = function () {
+    window.location = "/checkout";
+  };
 });
