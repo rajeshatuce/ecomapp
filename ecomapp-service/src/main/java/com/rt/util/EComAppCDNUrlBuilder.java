@@ -29,15 +29,15 @@ public class EComAppCDNUrlBuilder {
   }
 
   private String getEComCDNUrlForImages() {
-    return prepareCDNUrl() + "images/";
+    return prepareCDNUrl() + "cdn/images/";
   }
 
   private String getEComCDNUrlForJS() {
-    return prepareCDNUrl() + "js/";
+    return prepareCDNUrl() + "app/js/";
   }
 
   private String getEComCDNUrlForCSS() {
-    return prepareCDNUrl() + "css/";
+    return prepareCDNUrl() + "app/css/";
   }
 
   private String prepareCDNUrl() {
