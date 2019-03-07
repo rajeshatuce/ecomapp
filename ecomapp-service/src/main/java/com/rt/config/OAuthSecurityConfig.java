@@ -72,6 +72,9 @@ public class OAuthSecurityConfig extends WebSecurityConfigurerAdapter {
         // Authenticate all remaining URLs.
         .anyRequest().fullyAuthenticated()
         .and()
+        .formLogin()
+        .loginPage("/google/login")
+        .and()
         // Setting the logout URL "/logout" - default logout URL.
         .logout()
         // After successful logout the application will redirect to "/" path.
