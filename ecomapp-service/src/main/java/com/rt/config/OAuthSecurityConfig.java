@@ -14,7 +14,6 @@ import org.springframework.security.oauth2.client.OAuth2RestTemplate;
 import org.springframework.security.oauth2.client.filter.OAuth2ClientAuthenticationProcessingFilter;
 import org.springframework.security.oauth2.client.token.grant.code.AuthorizationCodeResourceDetails;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
 
 /**
  * Modifying or overriding the default spring boot security.
@@ -83,8 +82,7 @@ public class OAuthSecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
         // Setting the filter for the URL "/google/login".
         .addFilterAt(filter(), BasicAuthenticationFilter.class)
-        .csrf()
-        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse());
+        .csrf().disable();
   }
 
   /*This method for creating filter for OAuth authentication.*/

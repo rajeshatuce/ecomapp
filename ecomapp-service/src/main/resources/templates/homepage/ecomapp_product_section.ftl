@@ -1,103 +1,39 @@
 <#macro ecomapp_product_section>
-  <div class="w3-container w3-text-grey" id="products">
-    <p id="productGroup">Jeans</p>
-  </div>
+
+  <#list ACTIVE_PRODUCTS as key,value>
+
+    <div class="w3-container w3-text-grey" id="products">
+      <h5 id="productGroup">${key}</h5>
+    </div>
 
   <!-- Product grid -->
-  <div class="w3-row w3-grayscale">
-    <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="${CDN_IMG_URL}jeans1.jpg" class="products-width">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black w3-ripple"
-                    onclick="document.getElementById('productDetails').style.display='block'">Buy
-              now <i class="fa fa-shopping-cart"></i></button>
+    <#list value?chunk(4) as row>
+      <div class="w3-row">
+        <#list row as col>
+          <div class="w3-quarter">
+            <div class="w3-container">
+              <div class="w3-display-container">
+                  <#list col.productPictures as picture>
+                    <#if picture.productThumbNail>
+                      <img src="${CDN_IMG_URL}${picture.uniqueFileName}" class="products-width">
+                      <#if col.textOnImage?has_content>
+                        <span class="w3-tag w3-display-topleft">${col.textOnImage}</span>
+                      </#if>
+                    </#if>
+                  </#list>
+                <div class="w3-display-middle w3-display-hover">
+                  <button class="w3-button w3-black w3-ripple"
+                          onclick="document.getElementById('productDetails').style.display='block'">
+                    Buy now <i class="fa fa-shopping-cart"></i></button>
+                </div>
+              </div>
+              <p>${col.name}<br><b>${col.currencyLabel}${col.currentUnitPrice}</b></p>
+            </div>
           </div>
-        </div>
-        <p>Ripped Skinny Jeans<br><b>$24.99</b></p>
-      </div>
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="${CDN_IMG_URL}jeans3.jpg" class="products-width">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black w3-ripple">Buy now <i class="fa fa-shopping-cart"></i>
-            </button>
-          </div>
-        </div>
-        <p>Mega Ripped Jeans<br><b>$19.99</b></p>
-      </div>
-    </div>
 
-    <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="${CDN_IMG_URL}jeans2.jpg" class="products-width">
-          <span class="w3-tag w3-display-topleft">New</span>
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black w3-ripple">Buy now <i class="fa fa-shopping-cart"></i>
-            </button>
-          </div>
-        </div>
-        <p>Mega Ripped Jeans<br><b>$19.99</b></p>
+        </#list>
       </div>
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="${CDN_IMG_URL}jeans3.jpg" class="products-width">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black w3-ripple">Buy now <i class="fa fa-shopping-cart"></i>
-            </button>
-          </div>
-        </div>
-        <p>Washed Skinny Jeans<br><b>$20.50</b></p>
-      </div>
-    </div>
-
-    <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="${CDN_IMG_URL}jeans4.jpg" class="products-width">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black w3-ripple">Buy now <i class="fa fa-shopping-cart"></i>
-            </button>
-          </div>
-        </div>
-        <p>Washed Skinny Jeans<br><b>$20.50</b></p>
-      </div>
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="${CDN_IMG_URL}jeans5.jpg" class="products-width">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black w3-ripple">Buy now <i class="fa fa-shopping-cart"></i>
-            </button>
-          </div>
-        </div>
-        <p>Vintage Skinny Jeans<br><b>$14.99</b></p>
-      </div>
-    </div>
-
-    <div class="w3-col l3 s6">
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="${CDN_IMG_URL}jeans1.jpg" class="products-width">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black w3-ripple">Buy now <i class="fa fa-shopping-cart"></i>
-            </button>
-          </div>
-        </div>
-        <p>Vintage Skinny Jeans<br><b>$14.99</b></p>
-      </div>
-      <div class="w3-container">
-        <div class="w3-display-container">
-          <img src="${CDN_IMG_URL}jeans2.jpg" class="products-width">
-          <div class="w3-display-middle w3-display-hover">
-            <button class="w3-button w3-black w3-ripple">Buy now <i class="fa fa-shopping-cart"></i>
-            </button>
-          </div>
-        </div>
-        <p>Ripped Skinny Jeans<br><b>$24.99</b></p>
-      </div>
-    </div>
-  </div>
+    </#list>
+  </#list>
 </#macro>
 
