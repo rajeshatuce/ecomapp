@@ -189,3 +189,11 @@ input.ecom-search[type=text]:focus {
     top: 30px;
   }
 }
+
+.product-picture-modal-width {
+  width: 100% !important;
+}
+
+.ecomapp-fontbold {
+  font-weight: bold;
+}

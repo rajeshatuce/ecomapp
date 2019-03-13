@@ -5,12 +5,11 @@
         <i onclick="document.getElementById('productDetails').style.display='none'"
            class="fa fa-remove w3-right w3-button w3-transparent w3-xxlarge"></i>
         <div class="w3-row">
-          <div class="w3-container w3-twothird">
+          <div class="w3-twothird">
             <div class="w3-content w3-display-container">
-              <img class="mySlides" src="${CDN_IMG_URL}jeans1.jpg" style="width:100%">
-              <img class="mySlides" src="${CDN_IMG_URL}jeans2.jpg" style="width:100%">
-              <img class="mySlides" src="${CDN_IMG_URL}jeans3.jpg" style="width:100%">
-              <img class="mySlides" src="${CDN_IMG_URL}jeans4.jpg" style="width:100%">
+              <span id="productDetailsPicture">
+                <img class="mySlides" src="" style="width:100%"/>
+              </span>
 
               <button class="w3-button w3-black w3-ripple w3-display-left" onclick="plusDivs(-1)">
                 &#10094;
@@ -21,28 +20,27 @@
             </div>
           </div>
           <div class="w3-container w3-third w3-left-align">
-            <h3>Tailored Jeans</h3>
-            <p>Some text about the jeans..</p>
+            <h5 class="ecomapp-fontbold">{{productName}}</h5>
+            <p class="w3-small">{{shortDescription}}</p>
             <p>
-            <ul class="w3-text-gray">
-              <li>Best Cotton</li>
-              <li>Fine Color</li>
-              <li>Awsome Looks</li>
+            <ul class="w3-text-gray w3-small">
+              <li ng-repeat="x in pointsDescriptionArray">
+                {{x}}
+              </li>
             </ul>
             </p>
             <div>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star checked"></span>
-              <span class="fa fa-star"></span>
+              <span class="fa fa-star checked"
+                    ng-repeat="x in [].constructor(starRating) track by $index"></span>
+              <span class="fa fa-star"
+                    ng-repeat="x in [].constructor(balanceStarRating) track by $index"></span>
             </div>
             <hr/>
-            <p>Price: <b>$19.99</b></p>
-            <select class="w3-select" name="quantity">
-              <option value="1" selected="selected">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
+            <p>Price: <b>{{currencyLabel}}{{currentUnitPrice}}</b></p>
+            <select class="w3-select" name="selectedQuantity" ng-model="selectedQuantity">
+              <option ng-repeat="x in [].constructor(maxQuantityPerOrder) track by $index"
+                      value="{{$index+1}}">{{$index+1}}
+              </option>
             </select>
             <p>
               <button

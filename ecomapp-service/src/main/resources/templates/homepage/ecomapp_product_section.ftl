@@ -1,5 +1,4 @@
 <#macro ecomapp_product_section>
-
   <#list ACTIVE_PRODUCTS as key,value>
 
     <div class="w3-container w3-text-grey" id="products">
@@ -20,13 +19,27 @@
                         <span class="w3-tag w3-display-topleft">${col.textOnImage}</span>
                       </#if>
                     </#if>
+                    <input class="${col.id}_productPicture" type="hidden"
+                           value="${CDN_IMG_URL}${picture.uniqueFileName}"/>
                   </#list>
                 <div class="w3-display-middle w3-display-hover">
                   <button class="w3-button w3-black w3-ripple"
-                          onclick="document.getElementById('productDetails').style.display='block'">
+                          ng-click="openProductDetailsModal('${col.id}')">
                     Buy now <i class="fa fa-shopping-cart"></i></button>
                 </div>
               </div>
+              <input id="${col.id}_currentUnitPrice" type="hidden" value="${col.currentUnitPrice}"/>
+              <input id="${col.id}_shortDescription" type="hidden" value="${col.shortDescription}"/>
+              <input id="${col.id}_name" type="hidden" value="${col.name}"/>
+              <input id="${col.id}_pointsDescription" type="hidden"
+                     value="${col.pointsDescription}"/>
+              <input id="${col.id}_starRating" type="hidden" value="${col.starRating}"/>
+              <input id="${col.id}_previousUnitPrice" type="hidden"
+                     value="${col.previousUnitPrice}"/>
+              <input id="${col.id}_maxQuantityPerOrder" type="hidden"
+                     value="${col.maxQuantityPerOrder}"/>
+              <input id="${col.id}_productGroup" type="hidden" value="${col.productGroup}"/>
+              <input id="${col.id}_currencyLabel" type="hidden" value="${col.currencyLabel}"/>
               <p>${col.name}<br><b>${col.currencyLabel}${col.currentUnitPrice}</b></p>
             </div>
           </div>
