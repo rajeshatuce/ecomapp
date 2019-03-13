@@ -197,3 +197,7 @@ input.ecom-search[type=text]:focus {
 .ecomapp-fontbold {
   font-weight: bold;
 }
+
+.ecomapp-padding-left {
+  padding-left: 6px;
+}

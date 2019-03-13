@@ -40,7 +40,9 @@
                      value="${col.maxQuantityPerOrder}"/>
               <input id="${col.id}_productGroup" type="hidden" value="${col.productGroup}"/>
               <input id="${col.id}_currencyLabel" type="hidden" value="${col.currencyLabel}"/>
-              <p>${col.name}<br><b>${col.currencyLabel}${col.currentUnitPrice}</b></p>
+              <p>${col.name}<br><b>${col.currencyLabel}${col.currentUnitPrice}</b><span
+                  class="w3-small ecomapp-padding-left w3-text-gray"><s>${col.currencyLabel}${col.previousUnitPrice} </s></span>
+              </p>
             </div>
           </div>
 

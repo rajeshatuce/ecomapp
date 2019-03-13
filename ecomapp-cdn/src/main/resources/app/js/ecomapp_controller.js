@@ -35,6 +35,7 @@ app.controller('ecomappCtrl', function ($http, $scope) {
   $scope.currentUnitPrice = 0;
   $scope.maxQuantityPerOrder = 1;
   $scope.selectedQuantity = "1";
+  $scope.previousUnitPrice = 0;
 
   //method to open product details modal
   $scope.openProductDetailsModal = function (productId) {
@@ -73,6 +74,8 @@ app.controller('ecomappCtrl', function ($http, $scope) {
     $scope.maxQuantityPerOrder = parseInt(
         document.getElementById(productId + "_maxQuantityPerOrder").value);
     $scope.selectedQuantity = "1";
+    $scope.previousUnitPrice = document.getElementById(productId
+        + "_previousUnitPrice").value;
     document.getElementById('productDetails').style.display = 'block';
   };
 });

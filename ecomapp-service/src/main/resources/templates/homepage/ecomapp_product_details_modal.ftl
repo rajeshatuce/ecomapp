@@ -36,7 +36,9 @@
                     ng-repeat="x in [].constructor(balanceStarRating) track by $index"></span>
             </div>
             <hr/>
-            <p>Price: <b>{{currencyLabel}}{{currentUnitPrice}}</b></p>
+            <p>Price: <b>{{currencyLabel}}{{currentUnitPrice}}</b><span
+                class="w3-small ecomapp-padding-left w3-text-gray"><s>{{currencyLabel}}{{previousUnitPrice}} </s></span>
+            </p>
             <select class="w3-select" name="selectedQuantity" ng-model="selectedQuantity">
               <option ng-repeat="x in [].constructor(maxQuantityPerOrder) track by $index"
                       value="{{$index+1}}">{{$index+1}}
