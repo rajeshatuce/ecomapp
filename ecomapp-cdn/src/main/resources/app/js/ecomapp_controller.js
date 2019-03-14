@@ -3,21 +3,19 @@ app.controller('ecomappCtrl', function ($http, $scope) {
 
   // method for getting user details
   var getUser = function () {
-    $http.get('/user').success(function (user) {
-      $scope.user = user;
+    $http.get('/user').then(function (response) {
+      $scope.user = response.data;
       console.log('Logged User : ', user);
-    }).error(function (error) {
-      $scope.resource = error;
+    }).catch(function (err) {
     });
   };
   getUser();
 
   // method for logout
   $scope.logout = function () {
-    $http.post('/logout').success(function (res) {
+    $http.post('/logout').then(function (res) {
       $scope.user = null;
-    }).error(function (error) {
-      console.log("Logout error : ", error);
+    }).catch(function (err) {
     });
   };
   //method for checkout shopping cart

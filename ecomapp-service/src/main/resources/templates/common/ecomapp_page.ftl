@@ -14,7 +14,7 @@
   <body ng-app="ecomapp" ng-controller="ecomappCtrl" ng-cloak>
   <#-- This processes the enclosed content:  -->
     <#nested>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
   <script src="${CDN_JS_URL}ecomapp.js"></script>
   <script src="${CDN_JS_URL}ecomapp_controller.js"></script>
   </body>
