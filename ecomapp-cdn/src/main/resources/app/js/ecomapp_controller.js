@@ -22,8 +22,9 @@ app.controller('ecomappCtrl', function ($http, $scope) {
   $scope.checkoutShoppingCart = function () {
     window.location = "/checkout";
   };
-
+  //Model for product details modal
   $scope.imageSources = [];
+  $scope.productMainThumbnail = "";
   $scope.productName = "";
   $scope.shortDescription = "";
   $scope.pointsDescriptionArray = [];
@@ -34,9 +35,17 @@ app.controller('ecomappCtrl', function ($http, $scope) {
   $scope.maxQuantityPerOrder = 1;
   $scope.selectedQuantity = "1";
   $scope.previousUnitPrice = 0;
+  $scope.productId = "";
+  //Shopping cart Model
+  $scope.shoppingCart = {};
+  $scope.shoppingCart.products = [];
+  $scope.shoppingCart.total = 0.00;
+  $scope.shoppingCart.totalProductCount = 0;
+  $scope.shoppingCart.currencyLabel = "";
 
   //method to open product details modal
   $scope.openProductDetailsModal = function (productId) {
+    //create product image sources
     var results = document.getElementsByClassName(productId
         + "_productPicture");
     document.getElementById("productDetailsPicture").innerHTML = "";
@@ -74,6 +83,65 @@ app.controller('ecomappCtrl', function ($http, $scope) {
     $scope.selectedQuantity = "1";
     $scope.previousUnitPrice = document.getElementById(productId
         + "_previousUnitPrice").value;
+    $scope.productMainThumbnail = document.getElementById(productId
+        + "_productMainThumbNail").value;
+    $scope.productId = productId;
+    //display product details modal
     document.getElementById('productDetails').style.display = 'block';
+  };
+
+  //method to add product to shopping cart
+  $scope.addProductToShoppingCart = function () {
+    //check if product already in shopping cart then ignore this addition
+    for (i = 0; i < $scope.shoppingCart.products.length; i++) {
+      if ($scope.shoppingCart.products[i].productId == $scope.productId) {
+        console.log($scope.productId
+            + ", already in shopping cart. Not doing anything");
+        document.getElementById('productDetails').style.display = 'none';
+        return;
+      }
+    }
+    productToAdd = {};
+    productToAdd.productId = $scope.productId;
+    productToAdd.thumbNail = $scope.productMainThumbnail;
+    productToAdd.productName = $scope.productName;
+    productToAdd.currentUnitPrice = $scope.currentUnitPrice;
+    productToAdd.maxQuantityPerOrder = $scope.maxQuantityPerOrder;
+    productToAdd.selectedQuantity = $scope.selectedQuantity;
+    productToAdd.subTotal = Math.round((parseFloat($scope.currentUnitPrice)
+        * parseFloat($scope.selectedQuantity)) * 100) / 100;
+    $scope.shoppingCart.products.push(productToAdd);
+    $scope.shoppingCart.currencyLabel = $scope.currencyLabel;
+    $scope.shoppingCart.total += productToAdd.subTotal;
+    $scope.shoppingCart.total = Math.round($scope.shoppingCart.total * 100)
+        / 100;
+    $scope.shoppingCart.totalProductCount++;
+    //product added now close the product details modal
+    document.getElementById('productDetails').style.display = 'none';
+  };
+
+  $scope.onShoppingCartQuantityChange = function () {
+    var total = 0;
+    for (i = 0; i < $scope.shoppingCart.products.length; i++) {
+      $scope.shoppingCart.products[i].subTotal = Math.round((parseFloat(
+          $scope.shoppingCart.products[i].currentUnitPrice) * parseFloat(
+          $scope.shoppingCart.products[i].selectedQuantity)) * 100) / 100;
+      total += $scope.shoppingCart.products[i].subTotal;
+    }
+    $scope.shoppingCart.total = Math.round(total * 100) / 100;
+  };
+
+  $scope.onRemoveProductFromShoppingCart = function (event, productId) {
+    for (i = 0; i < $scope.shoppingCart.products.length; i++) {
+      if ($scope.shoppingCart.products[i].productId == productId) {
+        //update new total
+        $scope.shoppingCart.total = Math.round(($scope.shoppingCart.total
+            - $scope.shoppingCart.products[i].subTotal) * 100) / 100;
+        $scope.shoppingCart.products.splice(i, 1);//remove product id from shopping cart
+        $scope.shoppingCart.totalProductCount--;
+        event.target.parentElement.style.display = 'none';//make the section invisible
+        break;
+      }
+    }
   };
 });

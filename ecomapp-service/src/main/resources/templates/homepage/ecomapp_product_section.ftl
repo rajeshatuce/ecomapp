@@ -15,6 +15,8 @@
                   <#list col.productPictures as picture>
                     <#if picture.productThumbNail>
                       <img src="${CDN_IMG_URL}${picture.uniqueFileName}" class="products-width">
+                      <input id="${col.id}_productMainThumbNail"
+                             value="${CDN_IMG_URL}${picture.uniqueFileName}" type="hidden"/>
                       <#if col.textOnImage?has_content>
                         <span class="w3-tag w3-display-topleft">${col.textOnImage}</span>
                       </#if>

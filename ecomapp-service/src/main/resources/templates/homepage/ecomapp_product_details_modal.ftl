@@ -46,7 +46,8 @@
             </select>
             <p>
               <button
-                  class="w3-btn w3-round-xxlarge w3-red w3-hover-green w3-ripple fa fa-thumbs-up">
+                  class="w3-btn w3-round-xxlarge w3-red w3-hover-green w3-ripple fa fa-thumbs-up"
+                  ng-click="addProductToShoppingCart()">
                 Add to
                 Cart
               </button>

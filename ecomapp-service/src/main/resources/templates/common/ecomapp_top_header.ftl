@@ -31,127 +31,36 @@
 
         <div class="dropdown" style="display:inline;">
           <i class="fa fa-shopping-cart w3-hover-opacity dropbtn"></i>
-          <span class="w3-badge w3-small w3-right w3-black">3</span>
+          <span
+              class="w3-badge w3-small w3-right w3-black">{{shoppingCart.totalProductCount}}</span>
           <div class="dropdown-content  w3-hover-shadow w3-border topHeaderMenuPositionFix">
             <div class="w3-row">
               <div class="w3-container mycart">
                 <ul class="w3-ul w3-card-4">
-                  <li class="w3-bar">
-                    <span onclick="this.parentElement.style.display='none'"
+                  <li class="w3-bar" ng-repeat="x in shoppingCart.products">
+                    <span ng-click="onRemoveProductFromShoppingCart($event, x.productId)"
                           class="w3-col s1 w3-button w3-white w3-xlarge w3-right">×</span>
-                    <img src="${CDN_IMG_URL}jeans3.jpg"
+                    <img ng-src="{{x.thumbNail}}"
                          class="w3-col s3 w3-circle w3-padding-small mycartIcon">
                     <div class="w3-col s3 w3-padding-small">
-                      <span class="w3-small"><b>Style Jeans</b></span><br>
-                      <span class="w3-tiny w3-text-gray">1 X 450</span>
+                      <span class="w3-small"><b>{{x.productName}}</b></span><br>
+                      <span class="w3-tiny w3-text-gray">{{x.selectedQuantity}} X {{x.currentUnitPrice}}</span>
                     </div>
                     <div class="w3-col s2 w3-padding-small">
                       <span class="w3-small">
-                        <select class="w3-select" name="quantity">
-                          <option value="1" selected="selected">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
+                        <select class="w3-select" name="quantity" ng-model="x.selectedQuantity"
+                                ng-change="onShoppingCartQuantityChange()">
+                          <option
+                              ng-repeat="temp in [].constructor(x.maxQuantityPerOrder) track by $index"
+                              value="{{$index+1}}">{{$index+1}}
+                          </option>
                         </select>
                       </span>
                     </div>
                     <div class="w3-col s3 w3-padding-small">
-                      <span class="w3-small">Rs. 450.00</span>
+                      <span class="w3-small">{{shoppingCart.currencyLabel}} {{x.subTotal}}</span>
                     </div>
 
-
-                  </li>
-
-                  <li class="w3-bar">
-                    <span onclick="this.parentElement.style.display='none'"
-                          class="w3-col s1 w3-button w3-white w3-xlarge w3-right">×</span>
-                    <img src="${CDN_IMG_URL}jeans4.jpg"
-                         class="w3-col s3 w3-circle w3-padding-small mycartIcon">
-                    <div class="w3-col s3 w3-padding-small">
-                      <span class="w3-small"><b>New Style Jeans</b></span><br>
-                      <span class="w3-tiny w3-text-gray">1 X 750</span>
-                    </div>
-                    <div class="w3-col s2 w3-padding-small">
-                      <span class="w3-small">
-                        <select class="w3-select" name="quantity">
-                          <option value="1" selected="selected">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                        </select>
-                      </span>
-                    </div>
-                    <div class="w3-col s3 w3-padding-small">
-                      <span class="w3-small">Rs. 750.00</span>
-                    </div>
-
-                  </li>
-
-                  <li class="w3-bar">
-                    <span onclick="this.parentElement.style.display='none'"
-                          class="w3-col s1 w3-button w3-white w3-xlarge w3-right">×</span>
-                    <img src="${CDN_IMG_URL}jeans5.jpg"
-                         class="w3-col s3 w3-padding-small w3-circle mycartIcon">
-                    <div class="w3-col s3 w3-padding-small">
-                      <span class="w3-small"><b>Super Style Jeans</b></span><br>
-                      <span class="w3-tiny w3-text-gray">1 X 950</span>
-                    </div>
-                    <div class="w3-col s2 w3-padding-small">
-                      <span class="w3-small">
-                        <select class="w3-select" name="quantity">
-                          <option value="1" selected="selected">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                        </select>
-                      </span>
-                    </div>
-                    <div class="w3-col s3 w3-padding-small">
-                      <span class="w3-small">Rs. 950.00</span>
-                    </div>
-
-                  </li>
-                  <li class="w3-bar">
-                    <span onclick="this.parentElement.style.display='none'"
-                          class="w3-col s1 w3-button w3-white w3-xlarge w3-right">×</span>
-                    <img src="${CDN_IMG_URL}jeans2.jpg"
-                         class="w3-col s3 w3-padding-small w3-circle mycartIcon">
-                    <div class="w3-col s3 w3-padding-small">
-                      <span class="w3-small"><b>Super Style Jeans</b></span><br>
-                      <span class="w3-tiny w3-text-gray">1 X 250</span>
-                    </div>
-                    <div class="w3-col s2 w3-padding-small">
-                      <span class="w3-small">
-                        <select class="w3-select" name="quantity">
-                          <option value="1" selected="selected">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                        </select>
-                      </span>
-                    </div>
-                    <div class="w3-col s3 w3-padding-small">
-                      <span class="w3-small">Rs. 250.00</span>
-                    </div>
-
-                  </li>
-                  <li class="w3-bar">
-                    <span onclick="this.parentElement.style.display='none'"
-                          class="w3-col s1 w3-button w3-white w3-xlarge w3-right">×</span>
-                    <img src="${CDN_IMG_URL}jeans5.jpg"
-                         class="w3-col s3 w3-padding-small w3-circle mycartIcon">
-                    <div class="w3-col s3 w3-padding-small">
-                      <span class="w3-small"><b>Super Style Jeans</b></span><br>
-                      <span class="w3-tiny w3-text-gray">1 X 950</span>
-                    </div>
-                    <div class="w3-col s2 w3-padding-small">
-                      <span class="w3-small">
-                        <select class="w3-select" name="quantity">
-                          <option value="1" selected="selected">1</option>
-                          <option value="2">2</option>
-                          <option value="3">3</option>
-                        </select>
-                      </span>
-                    </div>
-                    <div class="w3-col s3 w3-padding-small">
-                      <span class="w3-small">Rs. 950.00</span>
-                    </div>
 
                   </li>
                 </ul>
@@ -159,7 +68,7 @@
             </div>
             <div class="w3-row w3-right">
               <button class="payment_button" ng-click="checkoutShoppingCart()">
-                <span>Rs. 2012.45</span></button>
+                <span>Rs. {{shoppingCart.total}}</span></button>
             </div>
           </div>
         </div>
