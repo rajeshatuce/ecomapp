@@ -37,7 +37,7 @@
             <div class="w3-row">
               <div class="w3-container mycart">
                 <ul class="w3-ul w3-card-4">
-                  <li class="w3-bar" ng-repeat="x in shoppingCart.products">
+                  <li class="w3-bar" ng-repeat="x in shoppingCart.products track by $index">
                     <span ng-click="onRemoveProductFromShoppingCart($event, x.productId)"
                           class="w3-col s1 w3-button w3-white w3-xlarge w3-right">×</span>
                     <img ng-src="{{x.thumbNail}}"

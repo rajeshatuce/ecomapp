@@ -22,6 +22,7 @@ app.controller('ecomappCtrl', function ($http, $scope) {
   $scope.checkoutShoppingCart = function () {
     window.location = "/checkout";
   };
+  //************************Initialization blocks************************
   //Model for product details modal
   $scope.imageSources = [];
   $scope.productMainThumbnail = "";
@@ -43,6 +44,35 @@ app.controller('ecomappCtrl', function ($http, $scope) {
   $scope.shoppingCart.totalProductCount = 0;
   $scope.shoppingCart.currencyLabel = "";
 
+  //Utility Method for loading shopping cart from local storage
+  $scope.loadShoppingCartFromLocalStorage = function () {
+    try {
+      //Attempt to load shopping cart from localstorage if available
+      var shoppingCartFromLocalStorage = localStorage.getItem('shoppingCart');
+      if (shoppingCartFromLocalStorage != undefined
+          && shoppingCartFromLocalStorage.length > 0) {
+        var tmp = JSON.parse(shoppingCartFromLocalStorage);
+        console.log('shoppingCartFromLocalStorage: ', tmp);
+        $scope.shoppingCart = tmp;
+      }
+    } catch (ex) {
+      console.log(
+          "Exception occurred while loading shopping cart from localstorage",
+          ex);
+    }
+  };
+  $scope.loadShoppingCartFromLocalStorage();
+  //Utility Method to persist shopping cart to local storage
+  $scope.persistShoppingCartToLocalStorage = function () {
+    try {
+      localStorage.setItem('shoppingCart', JSON.stringify($scope.shoppingCart));
+    } catch (ex) {
+      console.log(
+          "Exception occurred while persisting shopping cart to localstorage",
+          ex);
+    }
+  };
+  //**************************Event specific methods ******************************
   //method to open product details modal
   $scope.openProductDetailsModal = function (productId) {
     //create product image sources
@@ -101,6 +131,7 @@ app.controller('ecomappCtrl', function ($http, $scope) {
         return;
       }
     }
+    //add new product to shopping cart
     productToAdd = {};
     productToAdd.productId = $scope.productId;
     productToAdd.thumbNail = $scope.productMainThumbnail;
@@ -118,8 +149,10 @@ app.controller('ecomappCtrl', function ($http, $scope) {
     $scope.shoppingCart.totalProductCount++;
     //product added now close the product details modal
     document.getElementById('productDetails').style.display = 'none';
+    //persist shoppingcart in localstorage
+    $scope.persistShoppingCartToLocalStorage();
   };
-
+  //Method to be invoked when quantity in shopping cart changes
   $scope.onShoppingCartQuantityChange = function () {
     var total = 0;
     for (i = 0; i < $scope.shoppingCart.products.length; i++) {
@@ -129,8 +162,10 @@ app.controller('ecomappCtrl', function ($http, $scope) {
       total += $scope.shoppingCart.products[i].subTotal;
     }
     $scope.shoppingCart.total = Math.round(total * 100) / 100;
+    //persist new shopping cart to local storage
+    $scope.persistShoppingCartToLocalStorage();
   };
-
+  //Method to be invoked when a product is removed from shopping cart
   $scope.onRemoveProductFromShoppingCart = function (event, productId) {
     for (i = 0; i < $scope.shoppingCart.products.length; i++) {
       if ($scope.shoppingCart.products[i].productId == productId) {
@@ -139,7 +174,10 @@ app.controller('ecomappCtrl', function ($http, $scope) {
             - $scope.shoppingCart.products[i].subTotal) * 100) / 100;
         $scope.shoppingCart.products.splice(i, 1);//remove product id from shopping cart
         $scope.shoppingCart.totalProductCount--;
-        event.target.parentElement.style.display = 'none';//make the section invisible
+        //delete the li element
+        event.target.parentNode.parentNode.removeChild(event.target.parentNode);
+        //persist shoppingcart in localstorage
+        $scope.persistShoppingCartToLocalStorage();
         break;
       }
     }
