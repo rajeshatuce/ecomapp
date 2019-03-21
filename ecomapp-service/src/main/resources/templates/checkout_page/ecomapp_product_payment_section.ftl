@@ -10,7 +10,7 @@
         <thead>
         <tr class="w3-dark-grey">
           <th>ITEM IMAGE</th>
-          <th>ITEM DESCRIPTION</th>
+          <th>ITEM NAME</th>
           <th>UNIT PRICE</th>
           <th>QUANTITY</th>
           <th>SUB TOTAL</th>
@@ -18,66 +18,21 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td><img src="${CDN_IMG_URL}jeans2.jpg"
+          <#list Order.productsOrdered as product>
+          <tr>
+            <td><img src="${CDN_IMG_URL}${product.uniqueFileName}"
                    class="w3-col s3 w3-circle w3-padding-small mycartIcon"></td>
-          <td><b>New Style Jeans</b></td>
-          <td>
-            <div>Rs. 950.00</div>
-            <div class="w3-text-gray"><s>Rs. 1050.00 </s></div>
-          </td>
-          <td>2</td>
-          <td class="w3-border-right">Rs. 1900.00</td>
-          <td class="w3-text-red">Rs. 200.00</td>
-        </tr>
-        <tr>
-          <td><img src="${CDN_IMG_URL}jeans3.jpg"
-                   class="w3-col s3 w3-circle w3-padding-small mycartIcon"></td>
-          <td><b>Style Jeans</b></td>
-          <td>
-            <div>Rs. 450.00</div>
-            <div class="w3-text-gray"><s>Rs. 500.00 </s></div>
-          </td>
-          <td>1</td>
-          <td class="w3-border-right">Rs. 450.00</td>
-          <td class="w3-text-red">Rs. 100.00</td>
-        </tr>
-        <tr>
-          <td><img src="${CDN_IMG_URL}jeans4.jpg"
-                   class="w3-col s3 w3-circle w3-padding-small mycartIcon"></td>
-          <td><b>Super Style Jeans</b></td>
-          <td>
-            <div>Rs. 650.00</div>
-            <div class="w3-text-gray"><s>Rs. 800.00 </s></div>
-          </td>
-          <td>1</td>
-          <td class="w3-border-right">Rs. 650.00</td>
-          <td class="w3-text-red">Rs. 150.00</td>
-        </tr>
-        <tr>
-          <td><img src="${CDN_IMG_URL}jeans5.jpg"
-                   class="w3-col s3 w3-circle w3-padding-small mycartIcon"></td>
-          <td><b>Blue Style Jeans</b></td>
-          <td>
-            <div>Rs. 220.00</div>
-            <div class="w3-text-gray"><s>Rs. 250.00 </s></div>
-          </td>
-          <td>3</td>
-          <td class="w3-border-right">Rs. 660.00</td>
-          <td class="w3-text-red">Rs. 110.00</td>
-        </tr>
-        <tr>
-          <td><img src="${CDN_IMG_URL}jeans3.jpg"
-                   class="w3-col s3 w3-circle w3-padding-small mycartIcon"></td>
-          <td><b>Black Style Jeans</b></td>
-          <td>
-            <div>Rs. 220.00</div>
-            <div class="w3-text-gray"><s>Rs. 320.00 </s></div>
-          </td>
-          <td>1</td>
-          <td class="w3-border-right">Rs. 220.00</td>
-          <td class="w3-text-red">Rs. 100.00</td>
-        </tr>
+            <td><b>${product.name}</b></td>
+            <td>
+              <div>${product.currencyLabel} ${product.currentUnitPrice}</div>
+              <div class="w3-text-gray">
+                <s>${product.currencyLabel} ${product.previousUnitPrice} </s></div>
+            </td>
+            <td>${product.selectedQuantity}</td>
+            <td class="w3-border-right">${product.currencyLabel} ${product.formattedSubTotal}</td>
+            <td class="w3-text-red">${product.currencyLabel} ${product.formattedSavingsAmount}</td>
+          </tr>
+          </#list>
         </tbody>
       </table>
     </div>
@@ -99,7 +54,7 @@
                     <p class="w3-small">Subtotal</p>
                   </div>
                   <div class="w3-half">
-                    <p class="w3-small">Rs. 1895.00</p>
+                    <p class="w3-small">${Order.currencyLabel} ${Order.formattedSubTotal}</p>
                   </div>
                 </div>
                 <div class="w3-row">
@@ -107,7 +62,7 @@
                     <p class="w3-small">Delivery Charges</p>
                   </div>
                   <div class="w3-half">
-                    <p class="w3-small">Rs. 20.00</p>
+                    <p class="w3-small">${Order.currencyLabel} ${Order.formattedDeliveryChanges}</p>
                   </div>
                 </div>
               </div>
@@ -116,14 +71,14 @@
                   <p><b>TOTAL</b></p>
                 </div>
                 <div class="w3-half">
-                  <p><b>Rs. 2000.00</b></p>
+                  <p><b>${Order.currencyLabel} ${Order.formattedTotalCharges}</b></p>
                 </div>
               </div>
             </div>
             <div class="w3-container w3-third">
               <p class="w3-medium">You Saved!</p>
               <div class="w3-padding-small w3-red w3-circle w3-center">
-                <p class="w3-medium">Rs. 800.00</p>
+                <p class="w3-medium">${Order.currencyLabel} ${Order.formattedTotalSavings}</p>
               </div>
             </div>
           </div>

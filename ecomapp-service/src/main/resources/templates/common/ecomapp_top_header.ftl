@@ -67,8 +67,11 @@
               </div>
             </div>
             <div class="w3-row w3-right">
-              <button class="payment_button" ng-click="checkoutShoppingCart()">
-                <span>Rs. {{shoppingCart.total}}</span></button>
+              <form id="shoppingCartForm" action="/checkout" method="get">
+                <input id="shoppingCartValue" name="shoppingCartValue" type="hidden" value=""/>
+                <button type="button" class="payment_button" ng-click="checkoutShoppingCart()">
+                  <span>Rs. {{shoppingCart.total}}</span></button>
+              </form>
             </div>
           </div>
         </div>

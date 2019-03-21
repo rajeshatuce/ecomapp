@@ -18,10 +18,7 @@ app.controller('ecomappCtrl', function ($http, $scope) {
     }).catch(function (err) {
     });
   };
-  //method for checkout shopping cart
-  $scope.checkoutShoppingCart = function () {
-    window.location = "/checkout";
-  };
+
   //************************Initialization blocks************************
   //Model for product details modal
   $scope.imageSources = [];
@@ -181,5 +178,25 @@ app.controller('ecomappCtrl', function ($http, $scope) {
         break;
       }
     }
+  };
+
+  //method for checkout shopping cart
+  $scope.checkoutShoppingCart = function () {
+    productsInShoppingCart = [];
+    for (i = 0; i < $scope.shoppingCart.products.length; i++) {
+      temp = {};
+      temp.productId = $scope.shoppingCart.products[i].productId;
+      temp.selectedQuantity = $scope.shoppingCart.products[i].selectedQuantity;
+      productsInShoppingCart.push(temp);
+    }
+    if (productsInShoppingCart.length > 0) {
+      document.getElementById("shoppingCartValue").value = JSON.stringify(
+          productsInShoppingCart);
+      document.getElementById('shoppingCartForm').submit();
+    } else {
+      console.log("Shopping cart empty!! Nothing to submit.");
+      return false;
+    }
+
   };
 });

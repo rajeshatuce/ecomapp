@@ -17,6 +17,9 @@ public class EComAppConstant {
   public static final String ECOMAPP_HOMEPAGE = "homepage/ecomapp_homepage";
   public static final String ECOMAPP_CHECKOUT_PAGE = "checkout_page/ecomapp_checkout_page";
   public static final String ECOMAPP_MY_ORDERS_PAGE = "orders_page/ecomapp_my_orders_page";
+  public static final String CURRENCY_FORMAT_STRING = "%,.2f";
+  public static final String EMAIL = "email";
+  public static final String ORDER = "Order";
 
   public enum Status implements Serializable {
     Active("Active"),
