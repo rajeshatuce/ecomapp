@@ -201,3 +201,20 @@ input.ecom-search[type=text]:focus {
 .ecomapp-padding-left {
   padding-left: 6px;
 }
+
+/* order paid stamp*/
+.stamp {
+  box-shadow: 0 0 0 3px blue, 0 0 0 2px blue inset;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 5px 7px;
+  line-height: 22px;
+  color: red;
+  font-size: 16px;
+  font-family: 'Black Ops One', cursive;
+  text-transform: uppercase;
+  text-align: center;
+  opacity: 0.7;
+  transform: rotate(-22deg);
+}

@@ -10,6 +10,8 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
   <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Black+Ops+One' rel='stylesheet'
+        type='text/css'>
   <link rel="stylesheet" href="${CDN_CSS_URL}ecomapp.css">
   <body ng-app="ecomapp" ng-controller="ecomappCtrl" ng-cloak>
   <#-- This processes the enclosed content:  -->

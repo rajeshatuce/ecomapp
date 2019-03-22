@@ -39,10 +39,6 @@
     <!-- Empty Cart and Total Amount-->
     <div class="w3-row">
       <div class="w3-quarter w3-section w3-padding-small">
-        <button class="w3-btn w3-white w3-border w3-border-red w3-round-large w3-ripple fa fa-trash"
-                onclick="document.getElementById('emptyCartModal').style.display='block'">EMPTY
-          CART
-        </button>
       </div>
       <div class="w3-threequarter">
         <div class="w3-card-4 w3-border w3-round-large w3-right w3-section w3-padding-small">
