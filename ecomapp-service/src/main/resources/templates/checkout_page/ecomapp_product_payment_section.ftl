@@ -93,75 +93,39 @@
       <div class="w3-right">
         <button
             class="w3-btn w3-white w3-border w3-border-red w3-round-large w3-ripple fa fa-plus-square"
-            onclick="document.getElementById('addNewAddress').style.display='block'">ADD
+            ng-click="onClickAddNewAddressButton($event)">ADD
           NEW ADDRESS
         </button>
       </div>
     </div>
-    <div class="w3-row">
-      <div class="w3-card-4 w3-col l3 s6 w3-margin" style="min-width: 230px;">
+    <div class="w3-row" id="customerAddressSection" data-ng-init="fetchCustomerAddress()">
+      <div class="w3-card-4 w3-col l3 s6 w3-margin customerAddressMinWidth"
+           ng-repeat="a in newAddressAdded track by $index">
         <header class="w3-container w3-light-grey">
-          <h4>Home Address</h4>
+          <h4>{{a.customerAddressType}}</h4>
         </header>
         <div class="w3-container">
           <div class="w3-row">
             <div class="w3-right">
-              <i class="fa fa-check-square-o w3-green w3-xxlarge"></i>
+              <i class="fa fa-check-square-o w3-green w3-xxlarge"
+                 ng-show="a.selectedForDelivery"></i>
             </div>
           </div>
           <div class="w3-row">
             <div class="w3-container">
-              <p class="w3-medium">Rajesh Tiwary,
-                flat no:B-001, vandana tejyesh apartment,panathur main road,kadubesanhalli,near govt
-                primary school.pin 560103,
-                Ph: 8884278820</p>
+              <p class="w3-medium">{{a.deliveryFullName}},
+                {{a.address1}},
+                {{a.address2}},
+                {{a.landmark}},
+                {{a.townCity}},
+                {{a.state}} - {{a.pincode}},
+                Phone: {{a.mobileNumber}}</p>
             </div>
           </div>
         </div>
-        <button class="w3-button w3-block w3-ripple w3-dark-grey">DELIVER HERE</button>
-      </div>
-      <div class="w3-card-4 w3-col l3 s6 w3-margin" style="min-width: 230px;">
-        <header class="w3-container w3-light-grey">
-          <h4>Office Address</h4>
-        </header>
-        <div class="w3-container">
-          <div class="w3-row">
-            <div class="w3-right">
-            </div>
-          </div>
-          <div class="w3-row">
-            <div class="w3-container">
-              <p class="w3-medium">Goldman sachs pvt ltd,1st floor,crystal downs bldng,embassy
-                golf links business park,intermediate ring road,domlur,
-                BANGALORE, KARNATAKA 560071
-                India
-                Phone: 8884278820</p>
-            </div>
-          </div>
-        </div>
-        <button class="w3-button w3-block w3-ripple w3-dark-grey">DELIVER HERE</button>
-      </div>
-      <div class="w3-card-4 w3-col l3 s6 w3-margin" style="min-width: 230px;">
-        <header class="w3-container w3-light-grey">
-          <h4>Another Address</h4>
-        </header>
-        <div class="w3-container">
-          <div class="w3-row">
-            <div class="w3-right">
-            </div>
-          </div>
-          <div class="w3-row">
-            <div class="w3-container">
-              <p class="w3-medium">Ram Janm Tiwary,
-                Plot No-M/35, Phase-1,
-                Chhend Colony, In front of JJM Market Complex,
-                ROURKELA, ODISHA 769015
-                India,
-                Phone: 9937022900</p>
-            </div>
-          </div>
-        </div>
-        <button class="w3-button w3-block w3-ripple w3-dark-grey">DELIVER HERE</button>
+        <button class="w3-button w3-block w3-ripple w3-dark-grey"
+                ng-click="setSelectedForDelivery(a.customerAddressId)">DELIVER HERE
+        </button>
       </div>
     </div>
   </div>
@@ -176,7 +140,7 @@
         <input class="w3-radio" type="radio" name="paymentOptions" value="Cash_on_Delivery" checked>
         <label><i class="fa fa-rupee"></i>Cash on Delivery</label></p>
       <p>
-        <input class="w3-radio" type="radio" name="paymentOptions" value="Card_NetBanking">
+        <input class="w3-radio" type="radio" name="paymentOptions" value="Card_NetBanking" disabled>
         <label><i class="fa fa-credit-card"></i>Card/NetBanking</label></p>
     </div>
 

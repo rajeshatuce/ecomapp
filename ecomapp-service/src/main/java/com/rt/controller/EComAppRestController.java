@@ -1,11 +1,17 @@
 package com.rt.controller;
 
+import static com.rt.constant.EComAppConstant.CUSTOMER_ADDRESS_ID;
+
+import com.rt.model.CustomerAddress;
 import com.rt.model.Product;
 import com.rt.model.ProductGroup;
 import com.rt.service.EComAppAdminService;
+import com.rt.service.EComAppService;
 import com.rt.util.EcomAppServiceUtil;
 import java.security.Principal;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
@@ -21,14 +27,16 @@ public class EComAppRestController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(EComAppRestController.class);
 
-  private EComAppAdminService eComAppAdminService;
-  private EcomAppServiceUtil ecomAppServiceUtil;
+  private final EComAppAdminService eComAppAdminService;
+  private final EcomAppServiceUtil ecomAppServiceUtil;
+  private final EComAppService eComAppService;
 
   @Autowired
   public EComAppRestController(EComAppAdminService eComAppAdminService,
-      EcomAppServiceUtil ecomAppServiceUtil) {
+      EcomAppServiceUtil ecomAppServiceUtil, EComAppService eComAppService) {
     this.eComAppAdminService = eComAppAdminService;
     this.ecomAppServiceUtil = ecomAppServiceUtil;
+    this.eComAppService = eComAppService;
   }
 
   /**
@@ -85,10 +93,38 @@ public class EComAppRestController {
     return true;
   }
 
+  /**
+   * API to add new customer address
+   *
+   * @param customerAddress to be added to db
+   * @param principal user who is adding address
+   * @return status
+   */
+  @RequestMapping(value = "/addNewCustomerAddress", method = RequestMethod.POST)
+  public Map<String, String> addNewCustomerAddress(@RequestBody CustomerAddress customerAddress,
+      Principal principal) {
+    Map<String, String> result = new HashMap<>();
+    String emailId = ecomAppServiceUtil.getEmailIdFromPrincipalObject(principal);
+    LOGGER.info("Adding New Customer Address by :{}", emailId);
+    customerAddress.setCreatedBy(emailId);
+    customerAddress.setCreateDate(DateTime.now(DateTimeZone.UTC));
+    customerAddress.setCustomerName(principal.getName());
+    customerAddress.setCustomerAddressForEmailId(emailId);
+    result.put(CUSTOMER_ADDRESS_ID, eComAppService.saveCustomerAddress(customerAddress));
+    return result;
+  }
+
   @RequestMapping(value = "/getAllProducts", method = RequestMethod.GET)
   public List<Product> getAllProducts() {
     LOGGER.info("Fetch all products");
     return eComAppAdminService.getAllProducts();
+  }
+
+  @RequestMapping(value = "/fetchCustomerAddress", method = RequestMethod.GET)
+  public List<CustomerAddress> fetchCustomerAddress(Principal principal) {
+    String emailId = ecomAppServiceUtil.getEmailIdFromPrincipalObject(principal);
+    LOGGER.info("Fetching customer address for :{}", emailId);
+    return eComAppService.findCustomerAddressForEmailId(emailId);
   }
 
 

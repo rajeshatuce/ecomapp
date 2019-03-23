@@ -40,6 +40,8 @@ app.controller('ecomappCtrl', function ($http, $scope) {
   $scope.shoppingCart.total = 0.00;
   $scope.shoppingCart.totalProductCount = 0;
   $scope.shoppingCart.currencyLabel = "";
+  //address modal
+  $scope.newAddressAdded = [];
 
   //Utility Method for loading shopping cart from local storage
   $scope.loadShoppingCartFromLocalStorage = function () {
@@ -198,5 +200,68 @@ app.controller('ecomappCtrl', function ($http, $scope) {
       return false;
     }
 
+  };
+
+  //method to open add new address modal
+  $scope.onClickAddNewAddressButton = function (event) {
+    $scope.clearAddNewAddressForm(event);
+    document.getElementById('addNewAddress').style.display = 'block';
+  };
+  //method to clear Add New Address form
+  $scope.clearAddNewAddressForm = function (event) {
+    $scope.customerAddressType = "";
+    $scope.deliveryFullName = "";
+    $scope.mobileNumber = "";
+    $scope.pincode = "";
+    $scope.address1 = "";
+    $scope.address2 = "";
+    $scope.landmark = "";
+    $scope.townCity = "";
+    $scope.state = "";
+    event.preventDefault();
+  };
+  //method on Submit click of add new address button
+  $scope.onAddNewAddressOnSubmitClick = function (event) {
+    data = {};
+    data.customerAddressType = $scope.customerAddressType;
+    data.deliveryFullName = $scope.deliveryFullName;
+    data.mobileNumber = $scope.mobileNumber;
+    data.pincode = $scope.pincode;
+    data.address1 = $scope.address1;
+    data.address2 = $scope.address2;
+    data.landmark = $scope.landmark;
+    data.townCity = $scope.townCity;
+    data.state = $scope.state;
+    $http.post('/addNewCustomerAddress', data, {
+          headers: {
+            'Accept': 'application/json;odata=verbose'
+          }
+        }
+    ).then(function (result) {
+      data.customerAddressId = result.data.customerAddressId;
+      $scope.newAddressAdded.push(data);
+      document.getElementById('addNewAddress').style.display = 'none';
+    }, function (error) {
+      console.log('Error:');
+      console.log(error);
+    });
+    event.preventDefault();//prevent normal form submission
+  };
+  //fetch address for customer
+  $scope.fetchCustomerAddress = function () {
+    $http.get("/fetchCustomerAddress")
+    .then(function (response) {
+      $scope.newAddressAdded = response.data;
+    });
+  };
+  //API to select any address of delivery of product
+  $scope.setSelectedForDelivery = function (customerAddressId) {
+    for (i = 0; i < $scope.newAddressAdded.length; i++) {
+      if ($scope.newAddressAdded[i].customerAddressId == customerAddressId) {
+        $scope.newAddressAdded[i].selectedForDelivery = true;
+      } else {
+        $scope.newAddressAdded[i].selectedForDelivery = false;
+      }
+    }
   };
 });

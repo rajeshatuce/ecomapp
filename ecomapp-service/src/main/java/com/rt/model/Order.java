@@ -1,9 +1,15 @@
 package com.rt.model;
 
+import com.rt.constant.EComAppConstant.DeliveryStatus;
+import com.rt.constant.EComAppConstant.OrderStatus;
+import com.rt.constant.EComAppConstant.PaymentStatus;
+import com.rt.constant.EComAppConstant.PaymentType;
 import java.util.List;
+import org.joda.time.DateTime;
 
 public class Order {
 
+  private String orderId;
   private List<ProductCheckout> productsOrdered;
   private double subTotal;
   private double deliveryCharges;
@@ -14,6 +20,15 @@ public class Order {
   private String formattedDeliveryChanges;
   private String formattedTotalSavings;
   private String formattedTotalCharges;
+  private DateTime createDate;
+  private DateTime modifiedDate;
+  private String createdBy;
+  private String modifiedBy;
+  private PaymentType paymentType;
+  private OrderStatus orderStatus;
+  private PaymentStatus paymentStatus;
+  private DeliveryStatus deliveryStatus;
+  private CustomerAddress customerAddress;
 
   public List<ProductCheckout> getProductsOrdered() {
     return productsOrdered;
@@ -93,5 +108,85 @@ public class Order {
 
   public void setFormattedTotalCharges(String formattedTotalCharges) {
     this.formattedTotalCharges = formattedTotalCharges;
+  }
+
+  public String getOrderId() {
+    return orderId;
+  }
+
+  public void setOrderId(String orderId) {
+    this.orderId = orderId;
+  }
+
+  public DateTime getCreateDate() {
+    return createDate;
+  }
+
+  public void setCreateDate(DateTime createDate) {
+    this.createDate = createDate;
+  }
+
+  public DateTime getModifiedDate() {
+    return modifiedDate;
+  }
+
+  public void setModifiedDate(DateTime modifiedDate) {
+    this.modifiedDate = modifiedDate;
+  }
+
+  public String getCreatedBy() {
+    return createdBy;
+  }
+
+  public void setCreatedBy(String createdBy) {
+    this.createdBy = createdBy;
+  }
+
+  public String getModifiedBy() {
+    return modifiedBy;
+  }
+
+  public void setModifiedBy(String modifiedBy) {
+    this.modifiedBy = modifiedBy;
+  }
+
+  public PaymentType getPaymentType() {
+    return paymentType;
+  }
+
+  public void setPaymentType(PaymentType paymentType) {
+    this.paymentType = paymentType;
+  }
+
+  public OrderStatus getOrderStatus() {
+    return orderStatus;
+  }
+
+  public void setOrderStatus(OrderStatus orderStatus) {
+    this.orderStatus = orderStatus;
+  }
+
+  public PaymentStatus getPaymentStatus() {
+    return paymentStatus;
+  }
+
+  public void setPaymentStatus(PaymentStatus paymentStatus) {
+    this.paymentStatus = paymentStatus;
+  }
+
+  public DeliveryStatus getDeliveryStatus() {
+    return deliveryStatus;
+  }
+
+  public void setDeliveryStatus(DeliveryStatus deliveryStatus) {
+    this.deliveryStatus = deliveryStatus;
+  }
+
+  public CustomerAddress getCustomerAddress() {
+    return customerAddress;
+  }
+
+  public void setCustomerAddress(CustomerAddress customerAddress) {
+    this.customerAddress = customerAddress;
   }
 }

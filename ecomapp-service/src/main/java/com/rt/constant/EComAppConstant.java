@@ -20,6 +20,8 @@ public class EComAppConstant {
   public static final String CURRENCY_FORMAT_STRING = "%,.2f";
   public static final String EMAIL = "email";
   public static final String ORDER = "Order";
+  public static final String CUSTOMER_ADDRESS_ID = "customerAddressId";
+  public static final String CUSTOMER_ADDRESS = "CUSTOMER_ADDRESS";
 
   public enum Status implements Serializable {
     Active("Active"),
@@ -33,6 +35,85 @@ public class EComAppConstant {
 
     public String toString() {
       return this.status;
+    }
+  }
+
+  public enum PaymentType implements Serializable {
+    Cash_On_Delivery("COD"),
+    Credit_Card_Net_Banking("CCD");
+
+    private final String paymentType;
+
+    PaymentType(String paymentType) {
+      this.paymentType = paymentType;
+    }
+
+    public String toString() {
+      return this.paymentType;
+    }
+  }
+
+  public enum PaymentStatus implements Serializable {
+    Done("Done"),
+    Refunded("Refunded"),
+    Failed("Failed");
+
+    private final String paymentStatus;
+
+    PaymentStatus(String paymentStatus) {
+      this.paymentStatus = paymentStatus;
+    }
+
+    public String toString() {
+      return this.paymentStatus;
+    }
+  }
+
+  public enum OrderStatus implements Serializable {
+    Done("Done"),
+    In_Progress("In_Progress"),
+    Cancelled("Cancelled");
+
+    private final String orderStatus;
+
+    OrderStatus(String orderStatus) {
+      this.orderStatus = orderStatus;
+    }
+
+    public String toString() {
+      return this.orderStatus;
+    }
+  }
+
+  public enum DeliveryStatus implements Serializable {
+    Done("Done"),
+    In_Progress("In_Progress"),
+    Cancelled("Cancelled");
+
+    private final String deliveryStatus;
+
+    DeliveryStatus(String deliveryStatus) {
+      this.deliveryStatus = deliveryStatus;
+    }
+
+    public String toString() {
+      return this.deliveryStatus;
+    }
+  }
+
+  public enum CustomerAddressType implements Serializable {
+    Home("Home"),
+    Office("Office"),
+    Other("Other");
+
+    private final String customerAddressType;
+
+    CustomerAddressType(String customerAddressType) {
+      this.customerAddressType = customerAddressType;
+    }
+
+    public String toString() {
+      return this.customerAddressType;
     }
   }
 }

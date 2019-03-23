@@ -218,3 +218,8 @@ input.ecom-search[type=text]:focus {
   opacity: 0.7;
   transform: rotate(-22deg);
 }
+
+/* customer address*/
+.customerAddressMinWidth {
+  min-width: 230px;
+}

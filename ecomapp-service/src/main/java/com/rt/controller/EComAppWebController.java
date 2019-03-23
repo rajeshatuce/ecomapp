@@ -11,6 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rt.model.ProductSelected;
 import com.rt.service.EComAppService;
 import com.rt.util.EComAppCDNUrlBuilder;
+import com.rt.util.EcomAppServiceUtil;
 import java.security.Principal;
 import java.util.List;
 import org.slf4j.Logger;
@@ -33,12 +34,15 @@ public class EComAppWebController {
   private EComAppCDNUrlBuilder eComAppCDNUrlBuilder;
   private EComAppService eComAppService;
   private ObjectMapper objectMapper = new ObjectMapper();
+  private final EcomAppServiceUtil ecomAppServiceUtil;
 
   @Autowired
   public EComAppWebController(EComAppCDNUrlBuilder eComAppCDNUrlBuilder,
-      EComAppService eComAppService) {
+      EComAppService eComAppService,
+      EcomAppServiceUtil ecomAppServiceUtil) {
     this.eComAppCDNUrlBuilder = eComAppCDNUrlBuilder;
     this.eComAppService = eComAppService;
+    this.ecomAppServiceUtil = ecomAppServiceUtil;
   }
 
   @RequestMapping("/")
