@@ -4,7 +4,7 @@
 <#import "../common/ecomapp_sub_footer_section.ftl" as sub_footer_section>
 <#import "../common/ecomapp_footer.ftl" as footer>
 <#import "ecomapp_add_new_address_modal.ftl" as add_new_address_modal>
-<#import "ecomapp_empty_cart_modal.ftl" as empty_cart_modal>
+<#import "ecomapp_notification_modal.ftl" as notification_modal>
 <@page.ecomapp_page>
 
 <!-- !PAGE CONTENT! -->
@@ -23,5 +23,5 @@
 <!-- Add New Address Modal -->
   <@add_new_address_modal.ecomapp_add_new_address_modal/>
 <!-- Empty Cart Modal -->
-  <@empty_cart_modal.ecomapp_empty_cart_modal/>
+  <@notification_modal.ecomapp_notification_modal/>
 </@page.ecomapp_page>

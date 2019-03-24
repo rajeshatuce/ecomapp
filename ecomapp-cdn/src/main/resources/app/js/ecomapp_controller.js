@@ -42,6 +42,7 @@ app.controller('ecomappCtrl', function ($http, $scope) {
   $scope.shoppingCart.currencyLabel = "";
   //address modal
   $scope.newAddressAdded = [];
+  $scope.deliveryAddressId = "";
 
   //Utility Method for loading shopping cart from local storage
   $scope.loadShoppingCartFromLocalStorage = function () {
@@ -240,6 +241,7 @@ app.controller('ecomappCtrl', function ($http, $scope) {
     ).then(function (result) {
       data.customerAddressId = result.data.customerAddressId;
       $scope.newAddressAdded.push(data);
+      $scope.setSelectedForDelivery(data.customerAddressId);//select the newly added address for delivery
       document.getElementById('addNewAddress').style.display = 'none';
     }, function (error) {
       console.log('Error:');
@@ -259,9 +261,26 @@ app.controller('ecomappCtrl', function ($http, $scope) {
     for (i = 0; i < $scope.newAddressAdded.length; i++) {
       if ($scope.newAddressAdded[i].customerAddressId == customerAddressId) {
         $scope.newAddressAdded[i].selectedForDelivery = true;
+        $scope.deliveryAddressId = customerAddressId;
       } else {
         $scope.newAddressAdded[i].selectedForDelivery = false;
       }
+    }
+  };
+  //Method to invoke when place order is called
+  $scope.onPlaceOrderClick = function (event) {
+    if (document.getElementById("deliveryAddressId").value.length == 0) {
+      $scope.notificationMessage = "Please select delivery address!";
+      document.getElementById('notificationModal').style.display = 'block';
+      event.preventDefault();
+    } else {
+      //reset shopping cart
+      $scope.shoppingCart = {};
+      $scope.shoppingCart.products = [];
+      $scope.shoppingCart.total = 0.00;
+      $scope.shoppingCart.totalProductCount = 0;
+      $scope.shoppingCart.currencyLabel = "";
+      $scope.persistShoppingCartToLocalStorage();
     }
   };
 });

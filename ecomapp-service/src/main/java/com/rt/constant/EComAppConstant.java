@@ -22,6 +22,8 @@ public class EComAppConstant {
   public static final String ORDER = "Order";
   public static final String CUSTOMER_ADDRESS_ID = "customerAddressId";
   public static final String CUSTOMER_ADDRESS = "CUSTOMER_ADDRESS";
+  public static final String SHOPPING_CART_VALUE = "SHOPPING_CART_VALUE";
+  public static final String ORDER_PAGE = "ORDER_PAGE";
 
   public enum Status implements Serializable {
     Active("Active"),
@@ -56,7 +58,8 @@ public class EComAppConstant {
   public enum PaymentStatus implements Serializable {
     Done("Done"),
     Refunded("Refunded"),
-    Failed("Failed");
+    Failed("Failed"),
+    In_Progress("In_Progress");
 
     private final String paymentStatus;
 

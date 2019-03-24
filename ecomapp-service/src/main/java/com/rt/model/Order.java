@@ -6,9 +6,13 @@ import com.rt.constant.EComAppConstant.PaymentStatus;
 import com.rt.constant.EComAppConstant.PaymentType;
 import java.util.List;
 import org.joda.time.DateTime;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document(collection = "order")
 public class Order {
 
+  @Id
   private String orderId;
   private List<ProductCheckout> productsOrdered;
   private double subTotal;
@@ -28,7 +32,8 @@ public class Order {
   private OrderStatus orderStatus;
   private PaymentStatus paymentStatus;
   private DeliveryStatus deliveryStatus;
-  private CustomerAddress customerAddress;
+  private CustomerAddress orderDeliveryAddress;
+  private DateTime orderDeliveryDate;
 
   public List<ProductCheckout> getProductsOrdered() {
     return productsOrdered;
@@ -182,11 +187,19 @@ public class Order {
     this.deliveryStatus = deliveryStatus;
   }
 
-  public CustomerAddress getCustomerAddress() {
-    return customerAddress;
+  public CustomerAddress getOrderDeliveryAddress() {
+    return orderDeliveryAddress;
   }
 
-  public void setCustomerAddress(CustomerAddress customerAddress) {
-    this.customerAddress = customerAddress;
+  public void setOrderDeliveryAddress(CustomerAddress orderDeliveryAddress) {
+    this.orderDeliveryAddress = orderDeliveryAddress;
+  }
+
+  public DateTime getOrderDeliveryDate() {
+    return orderDeliveryDate;
+  }
+
+  public void setOrderDeliveryDate(DateTime orderDeliveryDate) {
+    this.orderDeliveryDate = orderDeliveryDate;
   }
 }

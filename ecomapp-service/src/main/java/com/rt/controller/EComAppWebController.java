@@ -5,9 +5,12 @@ import static com.rt.constant.EComAppConstant.ECOMAPP_CHECKOUT_PAGE;
 import static com.rt.constant.EComAppConstant.ECOMAPP_HOMEPAGE;
 import static com.rt.constant.EComAppConstant.ECOMAPP_MY_ORDERS_PAGE;
 import static com.rt.constant.EComAppConstant.ORDER;
+import static com.rt.constant.EComAppConstant.ORDER_PAGE;
+import static com.rt.constant.EComAppConstant.SHOPPING_CART_VALUE;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.rt.constant.EComAppConstant.PaymentType;
 import com.rt.model.ProductSelected;
 import com.rt.service.EComAppService;
 import com.rt.util.EComAppCDNUrlBuilder;
@@ -56,12 +59,36 @@ public class EComAppWebController {
   @RequestMapping(value = "/checkout", method = RequestMethod.GET)
   public String getEComAppCheckoutPage(@RequestParam("shoppingCartValue") String shoppingCartValue,
       Principal user, Model model) throws Exception {
-    LOGGER.info("Rendering checkout page");
+    String emailId = ecomAppServiceUtil.getEmailIdFromPrincipalObject(user);
+    LOGGER.info("Rendering checkout page for customer:{}", emailId);
     eComAppCDNUrlBuilder.addCDNUrlToModel(model);
     List<ProductSelected> productsSelected = objectMapper
         .readValue(shoppingCartValue, new TypeReference<List<ProductSelected>>() {
         });
-    model.addAttribute(ORDER, eComAppService.getOrderForSelectedProducts(productsSelected, user));
+    model
+        .addAttribute(ORDER, eComAppService.getOrderForSelectedProducts(productsSelected, emailId));
+    model.addAttribute(SHOPPING_CART_VALUE, shoppingCartValue);
+    model.addAttribute(ORDER_PAGE, false);
+    return ECOMAPP_CHECKOUT_PAGE;
+  }
+
+  @RequestMapping(value = "/createOrderForCustomer", method = RequestMethod.POST)
+  public String createOrderForCustomer(
+      @RequestParam("productsToPlaceOrder") String productsToPlaceOrder,
+      @RequestParam("deliveryAddressId") String deliveryAddressId,
+      @RequestParam("selectedPaymentOptions") PaymentType selectedPaymentOptions,
+      Principal user, Model model) throws Exception {
+    String emailId = ecomAppServiceUtil.getEmailIdFromPrincipalObject(user);
+    LOGGER.info("creating order for customer:{}", emailId);
+    eComAppCDNUrlBuilder.addCDNUrlToModel(model);
+    List<ProductSelected> productsSelected = objectMapper
+        .readValue(productsToPlaceOrder, new TypeReference<List<ProductSelected>>() {
+        });
+    model.addAttribute(ORDER, eComAppService
+        .createOrderForCustomer(productsSelected, emailId, deliveryAddressId,
+            selectedPaymentOptions));
+    model.addAttribute(SHOPPING_CART_VALUE, productsToPlaceOrder);
+    model.addAttribute(ORDER_PAGE, true);
     return ECOMAPP_CHECKOUT_PAGE;
   }
 

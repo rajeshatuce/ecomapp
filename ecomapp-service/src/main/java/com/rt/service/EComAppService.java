@@ -1,5 +1,9 @@
 package com.rt.service;
 
+import com.rt.constant.EComAppConstant.DeliveryStatus;
+import com.rt.constant.EComAppConstant.OrderStatus;
+import com.rt.constant.EComAppConstant.PaymentStatus;
+import com.rt.constant.EComAppConstant.PaymentType;
 import com.rt.constant.EComAppConstant.Status;
 import com.rt.model.CustomerAddress;
 import com.rt.model.Order;
@@ -8,12 +12,14 @@ import com.rt.model.ProductCheckout;
 import com.rt.model.ProductPicture;
 import com.rt.model.ProductSelected;
 import com.rt.repository.CustomerAddressRepository;
+import com.rt.repository.OrderRepository;
 import com.rt.repository.ProductsRepository;
 import com.rt.util.EcomAppServiceUtil;
-import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,13 +29,16 @@ public class EComAppService {
   private final ProductsRepository productsRepository;
   private final EcomAppServiceUtil ecomAppServiceUtil;
   private final CustomerAddressRepository customerAddressRepository;
+  private final OrderRepository orderRepository;
 
   @Autowired
   public EComAppService(ProductsRepository productsRepository,
-      EcomAppServiceUtil ecomAppServiceUtil, CustomerAddressRepository customerAddressRepository) {
+      EcomAppServiceUtil ecomAppServiceUtil, CustomerAddressRepository customerAddressRepository,
+      OrderRepository orderRepository) {
     this.productsRepository = productsRepository;
     this.ecomAppServiceUtil = ecomAppServiceUtil;
     this.customerAddressRepository = customerAddressRepository;
+    this.orderRepository = orderRepository;
   }
 
   /**
@@ -44,10 +53,11 @@ public class EComAppService {
    * Service to prepare Order for selected products
    *
    * @param productsSelected for checkout
-   * @param user who is selecting product
+   * @param userEmailId who is selecting product
    * @return Order object
    */
-  public Order getOrderForSelectedProducts(List<ProductSelected> productsSelected, Principal user) {
+  public Order getOrderForSelectedProducts(List<ProductSelected> productsSelected,
+      String userEmailId) {
     Order order = new Order();
     List<ProductCheckout> productsOrdered = new ArrayList<>();
 
@@ -99,7 +109,42 @@ public class EComAppService {
     order.setFormattedSubTotal(ecomAppServiceUtil.formatAmount(order.getSubTotal()));
     order.setFormattedTotalCharges(ecomAppServiceUtil.formatAmount(order.getTotalCharges()));
     order.setFormattedTotalSavings(ecomAppServiceUtil.formatAmount(order.getTotalSavings()));
+    order.setCreateDate(DateTime.now(DateTimeZone.UTC));
+    order.setCreatedBy(userEmailId);
     return order;//return order
+  }
+
+  /**
+   * Service to create order for customer
+   *
+   * @param productsSelected to be added as part of customer
+   * @param userEmailId for which order reated
+   * @param deliveryAddressId to where the product needs to be delivered
+   * @param selectedPaymentOptions for this delivery
+   * @return Order prsisted in DB
+   */
+  public Order createOrderForCustomer(List<ProductSelected> productsSelected, String userEmailId,
+      String deliveryAddressId, PaymentType selectedPaymentOptions) {
+    Order order = getOrderForSelectedProducts(productsSelected, userEmailId);
+    order.setPaymentType(selectedPaymentOptions);
+    order.setOrderStatus(OrderStatus.In_Progress);
+    order.setPaymentStatus(PaymentStatus.In_Progress);
+    order.setDeliveryStatus(DeliveryStatus.In_Progress);
+    CustomerAddress orderDeliveryAddress = null;
+    List<CustomerAddress> customerAddresses = findCustomerAddressForEmailId(userEmailId);
+    for (CustomerAddress address : customerAddresses) {
+      if (address.getCustomerAddressId().equals(deliveryAddressId)) {
+        orderDeliveryAddress = address;
+        break;
+      }
+    }
+    if (orderDeliveryAddress == null) {
+      throw new IllegalArgumentException(String
+          .format("Invalid addressId: %s, given by user: %s", deliveryAddressId, userEmailId));
+    }
+    order.setOrderDeliveryAddress(orderDeliveryAddress);
+    orderRepository.save(order);//Order saved
+    return order;
   }
 
   /**
