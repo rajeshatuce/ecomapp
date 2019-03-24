@@ -1,6 +1,10 @@
 package com.rt.controller;
 
 import static com.rt.constant.EComAppCDNConstant.CDN_WEBROOTPATH;
+import static com.rt.constant.EComAppCDNConstant.CSS;
+import static com.rt.constant.EComAppCDNConstant.JS;
+import static com.rt.constant.EComAppCDNConstant.TEXT_CSS;
+import static com.rt.constant.EComAppCDNConstant.TEXT_JAVASCRIPT;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,7 +16,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.util.ResourceUtils;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -46,13 +51,20 @@ public class EComAppCDNController {
     String restOfTheUrl = (String) request
         .getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
     try {
-
-      File file = ResourceUtils
-          .getFile("classpath:" + restOfTheUrl.substring(1));//remove first slash /
-      response.setContentType(tika.detect(file));
-      IOUtils.copy(new FileInputStream(file), response.getOutputStream());
+      Resource resource = new ClassPathResource(
+          restOfTheUrl.substring(1));//load app specific file in classpath
+      if (restOfTheUrl.endsWith(CSS)) {
+        response.setContentType(TEXT_CSS);
+      } else if (restOfTheUrl.endsWith(JS)) {
+        response.setContentType(TEXT_JAVASCRIPT);
+      } else {
+        response.setContentType(
+            tika.detect(resource.getInputStream()));//try to detect mime type from stream
+      }
+      IOUtils.copy(resource.getInputStream(), response.getOutputStream());//copy stream to output
     } catch (Exception err) {
-      LOGGER.error("Error occurred while streaming app specific file: {}", restOfTheUrl);
+      LOGGER
+          .error("Error occurred while streaming app specific file: {}, Err:{}", restOfTheUrl, err);
     }
   }
 
