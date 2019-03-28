@@ -1,5 +1,7 @@
 package com.rt.service;
 
+import static com.rt.constant.EComAppConstant.CREATE_DATE;
+
 import com.rt.constant.EComAppConstant.DeliveryStatus;
 import com.rt.constant.EComAppConstant.OrderStatus;
 import com.rt.constant.EComAppConstant.PaymentStatus;
@@ -21,6 +23,9 @@ import java.util.Map;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -158,9 +163,38 @@ public class EComAppService {
     return customerAddress.getCustomerAddressId();
   }
 
+  /**
+   * Service to fetch Customer Address For Email Id
+   *
+   * @param customerAddressForEmailId to be fetched
+   * @return List of Customer Address
+   */
   public List<CustomerAddress> findCustomerAddressForEmailId(String customerAddressForEmailId) {
     return customerAddressRepository.findAddressForCustomerEmailId(customerAddressForEmailId);
   }
 
+  /**
+   * Service to fetch orders for customer
+   */
+  public Page<Order> fetchOrdersForCustomer(String customerEmailId, int pageNumber, int pageSize) {
+    PageRequest pageRequest = new PageRequest(pageNumber, pageSize, new Sort(Sort.Direction.DESC,
+        CREATE_DATE));
+    return orderRepository.fetchOrdersForCustomer(customerEmailId, pageRequest);
+  }
 
+  /**
+   * API to fetch order for customer
+   *
+   * @param orderId to fetch order
+   * @param emailId of the user whose orderid is provided
+   * @return Order
+   */
+  public Order fetchOrderForCustomer(String orderId, String emailId) {
+    Order order = orderRepository.findOne(orderId);
+    if (order == null || !order.getCreatedBy().equals(emailId)) {
+      throw new IllegalArgumentException(
+          String.format("No matching orderId[ %s ] for customer[ %s ] found!", orderId, emailId));
+    }
+    return order;
+  }
 }

@@ -43,6 +43,8 @@ app.controller('ecomappCtrl', function ($http, $scope) {
   //address modal
   $scope.newAddressAdded = [];
   $scope.deliveryAddressId = "";
+  //customer orders
+  $scope.customerOrders = [];
 
   //Utility Method for loading shopping cart from local storage
   $scope.loadShoppingCartFromLocalStorage = function () {
@@ -282,5 +284,20 @@ app.controller('ecomappCtrl', function ($http, $scope) {
       $scope.shoppingCart.currencyLabel = "";
       $scope.persistShoppingCartToLocalStorage();
     }
+  };
+  //Method to fetch customer orders
+  $scope.fetchOrdersForCustomer = function (pageNumber, pageSize) {
+    $scope.customerOrdersCurrentPageNumber = "" + pageNumber;
+    var pageNumberToSendToServer = pageNumber - 1;
+    $http.get("/fetchCustomerOrders?pageNumber=" + pageNumberToSendToServer
+        + "&pageSize=" + pageSize)
+    .then(function (response) {
+      for (i = 0; i < response.data.content.length; i++) {
+        var d = new Date(response.data.content[i].createDate.millis);
+        response.data.content[i].createDateFormatted = d.toLocaleString();
+      }
+      $scope.customerOrders = response.data.content;
+      $scope.customerOrdersTotalPages = response.data.totalPages;
+    });
   };
 });

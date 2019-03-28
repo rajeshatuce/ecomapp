@@ -98,4 +98,16 @@ public class EComAppWebController {
     LOGGER.info("Rendering my orders page");
     return ECOMAPP_MY_ORDERS_PAGE;
   }
+
+  @RequestMapping(value = "/viewOrdersForCustomer", method = RequestMethod.GET)
+  public String viewOrdersForCustomer(@RequestParam("orderId") String orderId, Model model,
+      Principal user) {
+    eComAppCDNUrlBuilder.addCDNUrlToModel(model);
+    String emailId = ecomAppServiceUtil.getEmailIdFromPrincipalObject(user);
+    LOGGER.info("Rendering details for order ID : {}, for customer: {}", orderId, emailId);
+    model.addAttribute(ORDER, eComAppService
+        .fetchOrderForCustomer(orderId, emailId));
+    model.addAttribute(ORDER_PAGE, true);
+    return ECOMAPP_CHECKOUT_PAGE;
+  }
 }

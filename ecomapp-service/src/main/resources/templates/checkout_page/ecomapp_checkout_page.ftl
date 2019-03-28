@@ -22,6 +22,6 @@
 </div>
 <!-- Add New Address Modal -->
   <@add_new_address_modal.ecomapp_add_new_address_modal/>
-<!-- Empty Cart Modal -->
+<!-- Notification Modal -->
   <@notification_modal.ecomapp_notification_modal/>
 </@page.ecomapp_page>

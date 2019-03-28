@@ -3,6 +3,7 @@ package com.rt.controller;
 import static com.rt.constant.EComAppConstant.CUSTOMER_ADDRESS_ID;
 
 import com.rt.model.CustomerAddress;
+import com.rt.model.Order;
 import com.rt.model.Product;
 import com.rt.model.ProductGroup;
 import com.rt.service.EComAppAdminService;
@@ -17,9 +18,11 @@ import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -125,6 +128,23 @@ public class EComAppRestController {
     String emailId = ecomAppServiceUtil.getEmailIdFromPrincipalObject(principal);
     LOGGER.info("Fetching customer address for :{}", emailId);
     return eComAppService.findCustomerAddressForEmailId(emailId);
+  }
+
+  /**
+   * API to fetch orders for logged in user
+   *
+   * @param principal for which orders need to be shown
+   * @return Orders
+   */
+  @RequestMapping(value = "/fetchCustomerOrders", method = RequestMethod.GET)
+  public Page<Order> fetchCustomerOrders(
+      @RequestParam(value = "pageNumber", defaultValue = "0") Integer pageNumber,
+      @RequestParam(value = "pageSize", defaultValue = "50") Integer pageSize,
+      Principal principal) {
+    String emailId = ecomAppServiceUtil.getEmailIdFromPrincipalObject(principal);
+    LOGGER.info("Fetching orders for customer :{}, pageNumber:{}, pageSize:{}", emailId, pageNumber,
+        pageSize);
+    return eComAppService.fetchOrdersForCustomer(emailId, pageNumber, pageSize);
   }
 
 
