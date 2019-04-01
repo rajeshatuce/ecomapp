@@ -20,6 +20,9 @@ app.controller('ecomappCtrl', function ($http, $scope) {
   };
 
   //************************Initialization blocks************************
+  //Customer query success
+  $scope.postCustomerQueryStatus = false;
+  $scope.customerQuery = {};
   //Model for product details modal
   $scope.imageSources = [];
   $scope.productMainThumbnail = "";
@@ -299,5 +302,26 @@ app.controller('ecomappCtrl', function ($http, $scope) {
       $scope.customerOrders = response.data.content;
       $scope.customerOrdersTotalPages = response.data.totalPages;
     });
+  };
+  //API to call on post customer query
+  $scope.onPostCustomerQuery = function (event) {
+    $http.post('/general/postCustomerQuery', $scope.customerQuery, {
+          headers: {
+            'Accept': 'application/json;odata=verbose'
+          }
+        }
+    ).then(function (result) {
+      $scope.postCustomerQueryStatus = true;
+      $scope.customerQueryStatusCSS = "w3-pale-green";
+      $scope.customerQueryStatusMessage = "Thanks for your query! We will reach out to you in 1-2 days";
+      $scope.customerQuery.name = "";
+      $scope.customerQuery.email = "";
+      $scope.customerQuery.subject = "";
+      $scope.customerQuery.message = "";
+    }, function (error) {
+      console.log('Error:');
+      console.log(error);
+    });
+    event.preventDefault();
   };
 });

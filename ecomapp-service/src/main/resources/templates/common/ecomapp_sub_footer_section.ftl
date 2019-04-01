@@ -4,16 +4,27 @@
       <div class="w3-col s4">
         <h4>Contact</h4>
         <p>Questions? Go ahead.</p>
-        <form action="/action_page.php" target="_blank">
-          <p><input class="w3-input w3-border" type="text" placeholder="Name" name="Name" required>
+        <form action="#" name="customerQueryForm">
+          <div class="w3-panel w3-round-xxlarge w3-border" ng-class="customerQueryStatusCSS"
+               ng-show="postCustomerQueryStatus">
+            <p><i class="fa fa-check"></i>{{customerQueryStatusMessage}}</p>
+          </div>
+          <p ng-if="!user"><input class="w3-input w3-border" type="text" placeholder="Name"
+                                  name="Name" ng-model="customerQuery.name" required>
           </p>
-          <p><input class="w3-input w3-border" type="text" placeholder="Email" name="Email"
-                    required></p>
+          <p ng-if="!user"><input class="w3-input w3-border" type="email" placeholder="Email"
+                                  name="Email" ng-model="customerQuery.email"
+                                  required></p>
           <p><input class="w3-input w3-border" type="text" placeholder="Subject" name="Subject"
+                    ng-model="customerQuery.subject"
                     required></p>
           <p><input class="w3-input w3-border" type="text" placeholder="Message" name="Message"
+                    ng-model="customerQuery.message"
                     required></p>
-          <button type="submit" class="w3-button w3-block w3-ripple w3-black">Send</button>
+          <button class="w3-button w3-block w3-ripple w3-black"
+                  ng-disabled="customerQueryForm.$invalid" ng-click="onPostCustomerQuery($event)">
+            Send
+          </button>
         </form>
       </div>
 

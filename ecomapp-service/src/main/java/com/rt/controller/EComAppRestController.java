@@ -2,7 +2,9 @@ package com.rt.controller;
 
 import static com.rt.constant.EComAppConstant.CUSTOMER_ADDRESS_ID;
 
+import com.rt.constant.EComAppConstant.CustomerQueryStatus;
 import com.rt.model.CustomerAddress;
+import com.rt.model.CustomerQuery;
 import com.rt.model.Order;
 import com.rt.model.Product;
 import com.rt.model.ProductGroup;
@@ -145,6 +147,30 @@ public class EComAppRestController {
     LOGGER.info("Fetching orders for customer :{}, pageNumber:{}, pageSize:{}", emailId, pageNumber,
         pageSize);
     return eComAppService.fetchOrdersForCustomer(emailId, pageNumber, pageSize);
+  }
+
+  /**
+   * API to post customer query
+   *
+   * @return response
+   */
+  @RequestMapping(value = "/general/postCustomerQuery", method = RequestMethod.POST)
+  public Map<String, String> postCustomerQuery(@RequestBody CustomerQuery customerQuery,
+      Principal principal) {
+    if (principal != null) {
+      String emailId = ecomAppServiceUtil.getEmailIdFromPrincipalObject(principal);
+      LOGGER.info("Saving customer query for emailId: {}", emailId);
+      customerQuery.setEmail(emailId);
+      customerQuery.setName(principal.getName());
+    } else {
+      LOGGER.info("Saving customer query");
+    }
+    customerQuery.setCreateDate(DateTime.now(DateTimeZone.UTC));
+    customerQuery.setCustomerQueryStatus(CustomerQueryStatus.Pending);
+    eComAppService.saveCustomerQuery(customerQuery);
+    Map<String, String> result = new HashMap<>();
+    result.put("status", "true");
+    return result;
   }
 
 

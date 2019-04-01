@@ -115,9 +115,20 @@ public class EComAppConstant {
     CustomerAddressType(String customerAddressType) {
       this.customerAddressType = customerAddressType;
     }
+  }
+
+  public enum CustomerQueryStatus implements Serializable {
+    Pending("Pending"),
+    Replied("Replied");
+
+    private final String customerQueryStatus;
+
+    CustomerQueryStatus(String customerQueryStatus) {
+      this.customerQueryStatus = customerQueryStatus;
+    }
 
     public String toString() {
-      return this.customerAddressType;
+      return this.customerQueryStatus;
     }
   }
 }

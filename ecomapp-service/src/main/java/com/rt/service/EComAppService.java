@@ -8,12 +8,14 @@ import com.rt.constant.EComAppConstant.PaymentStatus;
 import com.rt.constant.EComAppConstant.PaymentType;
 import com.rt.constant.EComAppConstant.Status;
 import com.rt.model.CustomerAddress;
+import com.rt.model.CustomerQuery;
 import com.rt.model.Order;
 import com.rt.model.Product;
 import com.rt.model.ProductCheckout;
 import com.rt.model.ProductPicture;
 import com.rt.model.ProductSelected;
 import com.rt.repository.CustomerAddressRepository;
+import com.rt.repository.CustomerQueryRepository;
 import com.rt.repository.OrderRepository;
 import com.rt.repository.ProductsRepository;
 import com.rt.util.EcomAppServiceUtil;
@@ -35,15 +37,17 @@ public class EComAppService {
   private final EcomAppServiceUtil ecomAppServiceUtil;
   private final CustomerAddressRepository customerAddressRepository;
   private final OrderRepository orderRepository;
+  private final CustomerQueryRepository customerQueryRepository;
 
   @Autowired
   public EComAppService(ProductsRepository productsRepository,
       EcomAppServiceUtil ecomAppServiceUtil, CustomerAddressRepository customerAddressRepository,
-      OrderRepository orderRepository) {
+      OrderRepository orderRepository, CustomerQueryRepository customerQueryRepository) {
     this.productsRepository = productsRepository;
     this.ecomAppServiceUtil = ecomAppServiceUtil;
     this.customerAddressRepository = customerAddressRepository;
     this.orderRepository = orderRepository;
+    this.customerQueryRepository = customerQueryRepository;
   }
 
   /**
@@ -196,5 +200,12 @@ public class EComAppService {
           String.format("No matching orderId[ %s ] for customer[ %s ] found!", orderId, emailId));
     }
     return order;
+  }
+
+  /**
+   * API to save customer query
+   */
+  public void saveCustomerQuery(CustomerQuery customerQuery) {
+    customerQueryRepository.save(customerQuery);
   }
 }
