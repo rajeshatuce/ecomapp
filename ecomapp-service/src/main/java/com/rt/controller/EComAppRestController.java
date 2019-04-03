@@ -1,14 +1,13 @@
 package com.rt.controller;
 
 import static com.rt.constant.EComAppConstant.CUSTOMER_ADDRESS_ID;
+import static com.rt.constant.EComAppConstant.STATUS;
+import static com.rt.constant.EComAppConstant.TRUE;
 
 import com.rt.constant.EComAppConstant.CustomerQueryStatus;
 import com.rt.model.CustomerAddress;
 import com.rt.model.CustomerQuery;
 import com.rt.model.Order;
-import com.rt.model.Product;
-import com.rt.model.ProductGroup;
-import com.rt.service.EComAppAdminService;
 import com.rt.service.EComAppService;
 import com.rt.util.EcomAppServiceUtil;
 import java.security.Principal;
@@ -32,14 +31,12 @@ public class EComAppRestController {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(EComAppRestController.class);
 
-  private final EComAppAdminService eComAppAdminService;
   private final EcomAppServiceUtil ecomAppServiceUtil;
   private final EComAppService eComAppService;
 
   @Autowired
-  public EComAppRestController(EComAppAdminService eComAppAdminService,
-      EcomAppServiceUtil ecomAppServiceUtil, EComAppService eComAppService) {
-    this.eComAppAdminService = eComAppAdminService;
+  public EComAppRestController(EcomAppServiceUtil ecomAppServiceUtil,
+      EComAppService eComAppService) {
     this.ecomAppServiceUtil = ecomAppServiceUtil;
     this.eComAppService = eComAppService;
   }
@@ -53,49 +50,6 @@ public class EComAppRestController {
   @RequestMapping("/user")
   public Principal user(Principal user) {
     return user;
-  }
-
-  /**
-   * REST service to add product group to DB
-   *
-   * @param productGroup document
-   * @param user who is adding the productGroup
-   * @return boolean status
-   */
-  @RequestMapping(value = "/admin/addProductGroup", method = RequestMethod.POST)
-  public boolean addProductGroup(@RequestBody ProductGroup productGroup, Principal user) {
-    LOGGER.info("Adding product group");
-    productGroup.setCreatedBy(ecomAppServiceUtil.getEmailIdFromPrincipalObject(user));
-    productGroup.setCreateDate(DateTime.now(DateTimeZone.UTC));
-    eComAppAdminService.addProductGroups(productGroup);
-    return true;
-  }
-
-  /**
-   * API to fetch all productGroups from DB
-   *
-   * @return List<ProductGroup>
-   */
-  @RequestMapping(value = "/getAllProductGroups", method = RequestMethod.GET)
-  public List<ProductGroup> getAllProductGroups() {
-    LOGGER.info("Fetching all product groups");
-    return eComAppAdminService.getAllProductGroups();
-  }
-
-  /**
-   * API to addProduct
-   *
-   * @param product information
-   * @param user who is adding product
-   * @return boolean result
-   */
-  @RequestMapping(value = "/admin/addProduct", method = RequestMethod.POST)
-  public boolean addProduct(@RequestBody Product product, Principal user) {
-    LOGGER.info("Adding product to DB");
-    product.setCreatedBy(ecomAppServiceUtil.getEmailIdFromPrincipalObject(user));
-    product.setCreateDate(DateTime.now(DateTimeZone.UTC));
-    eComAppAdminService.addProduct(product);
-    return true;
   }
 
   /**
@@ -117,12 +71,6 @@ public class EComAppRestController {
     customerAddress.setCustomerAddressForEmailId(emailId);
     result.put(CUSTOMER_ADDRESS_ID, eComAppService.saveCustomerAddress(customerAddress));
     return result;
-  }
-
-  @RequestMapping(value = "/getAllProducts", method = RequestMethod.GET)
-  public List<Product> getAllProducts() {
-    LOGGER.info("Fetch all products");
-    return eComAppAdminService.getAllProducts();
   }
 
   @RequestMapping(value = "/fetchCustomerAddress", method = RequestMethod.GET)
@@ -169,7 +117,7 @@ public class EComAppRestController {
     customerQuery.setCustomerQueryStatus(CustomerQueryStatus.Pending);
     eComAppService.saveCustomerQuery(customerQuery);
     Map<String, String> result = new HashMap<>();
-    result.put("status", "true");
+    result.put(STATUS, TRUE);
     return result;
   }
 

@@ -25,6 +25,9 @@ public class EComAppConstant {
   public static final String SHOPPING_CART_VALUE = "SHOPPING_CART_VALUE";
   public static final String ORDER_PAGE = "ORDER_PAGE";
   public static final String CREATE_DATE = "createDate";
+  public static final String ROLE_USER = "ROLE_USER";
+  public static final String STATUS = "Status";
+  public static final String TRUE = "true";
 
   public enum Status implements Serializable {
     Active("Active"),
@@ -129,6 +132,21 @@ public class EComAppConstant {
 
     public String toString() {
       return this.customerQueryStatus;
+    }
+  }
+
+  public enum UserRole implements Serializable {
+    ROLE_ADMIN("ROLE_ADMIN"),
+    ROLE_OPS("ROLE_OPS");
+
+    private final String userRole;
+
+    UserRole(String userRole) {
+      this.userRole = userRole;
+    }
+
+    public String toString() {
+      return this.userRole;
     }
   }
 }

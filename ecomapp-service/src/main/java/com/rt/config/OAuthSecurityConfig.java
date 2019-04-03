@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.ResourceServerProperties;
 import org.springframework.boot.autoconfigure.security.oauth2.resource.UserInfoTokenServices;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -20,11 +21,13 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
  */
 @Configurable
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(securedEnabled = true)
 public class OAuthSecurityConfig extends WebSecurityConfigurerAdapter {
 
   private OAuth2ClientContext oauth2ClientContext;
   private AuthorizationCodeResourceDetails authorizationCodeResourceDetails;
   private ResourceServerProperties resourceServerProperties;
+  private EComAppAuthoritiesExtractor eComAppAuthoritiesExtractor;
 
   @Autowired
   public void setOauth2ClientContext(OAuth2ClientContext oauth2ClientContext) {
@@ -42,9 +45,15 @@ public class OAuthSecurityConfig extends WebSecurityConfigurerAdapter {
     this.resourceServerProperties = resourceServerProperties;
   }
 
+  @Autowired
+  public void seteComAppAuthoritiesExtractor(
+      EComAppAuthoritiesExtractor eComAppAuthoritiesExtractor) {
+    this.eComAppAuthoritiesExtractor = eComAppAuthoritiesExtractor;
+  }
+
   /* This method is for overriding the default AuthenticationManagerBuilder.
-   We can specify how the user details are kept in the application. It may
-   be in a database, LDAP or in memory.*/
+     We can specify how the user details are kept in the application. It may
+     be in a database, LDAP or in memory.*/
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     super.configure(auth);
@@ -99,9 +108,13 @@ public class OAuthSecurityConfig extends WebSecurityConfigurerAdapter {
 
     // Setting the token service. It will help for getting the token and
     // user details from the OAuth Service.
+    UserInfoTokenServices userInfoTokenServices = new UserInfoTokenServices(
+        resourceServerProperties.getUserInfoUri(),
+        resourceServerProperties.getClientId());
+    userInfoTokenServices
+        .setAuthoritiesExtractor(eComAppAuthoritiesExtractor);
     oAuth2Filter
-        .setTokenServices(new UserInfoTokenServices(resourceServerProperties.getUserInfoUri(),
-            resourceServerProperties.getClientId()));
+        .setTokenServices(userInfoTokenServices);
 
     return oAuth2Filter;
   }
