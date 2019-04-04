@@ -1,10 +1,16 @@
 // Creating the Angular Controller
 app.controller('ecomappCtrl', function ($http, $scope) {
-
+  $scope.adminRole = false;
   // method for getting user details
   var getUser = function () {
     $http.get('/user').then(function (response) {
       $scope.user = response.data;
+      //check if user has admin role
+      for (i = 0; i < $scope.user.authorities.length; i++) {
+        if ($scope.user.authorities[i].authority == "ROLE_ADMIN") {
+          $scope.adminRole = true;
+        }
+      }
       console.log('Logged User : ', user);
     }).catch(function (err) {
     });
@@ -18,7 +24,6 @@ app.controller('ecomappCtrl', function ($http, $scope) {
     }).catch(function (err) {
     });
   };
-
   //************************Initialization blocks************************
   //Customer query success
   $scope.postCustomerQueryStatus = false;

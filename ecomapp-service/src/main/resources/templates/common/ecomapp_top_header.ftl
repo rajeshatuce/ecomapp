@@ -25,6 +25,7 @@
             <a href="#" class="w3-border-bottom">My Account</a>
             <a href="myOrders" class="w3-border-bottom">My Orders</a>
             <a href="#" class="w3-border-bottom">Customer Service</a>
+            <a href="/admin/home" class="w3-border-bottom" ng-show="adminRole">Admin Page</a>
             <a href="/" class="w3-border-bottom" ng-click="logout()">Logout</a>
           </div>
         </div>
