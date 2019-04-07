@@ -2,7 +2,8 @@
   <!-- Products Selected Table-->
   <div class="w3-container">
     <div class="w3-panel w3-border-bottom ecomapp-margin-top-28px">
-      <h5><i class="fa fa-shopping-cart"></i>Your Cart( 04 items )</h5>
+      <#assign noOfProducts = Order.productsOrdered?size>
+      <h5><i class="fa fa-shopping-cart"></i>Your Cart( ${noOfProducts} items )</h5>
     </div>
     <!-- Products Added in Cart Table-->
     <div class="w3-responsive w3-card-4">

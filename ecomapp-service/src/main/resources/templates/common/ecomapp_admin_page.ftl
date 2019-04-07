@@ -1,7 +1,7 @@
 <#macro ecomapp_admin_page>
   <!DOCTYPE html>
   <html>
-  <title>EComAppAdminPage</title>
+  <title>${APP_HOME_SETTING.appLogoText}</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">

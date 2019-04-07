@@ -1,6 +1,7 @@
 package com.rt.util;
 
 import static com.rt.constant.EComAppConstant.CDN_CSS_URL;
+import static com.rt.constant.EComAppConstant.CDN_IMAGES_LOCATION;
 import static com.rt.constant.EComAppConstant.CDN_IMG_URL;
 import static com.rt.constant.EComAppConstant.CDN_JS_URL;
 import static com.rt.constant.EComAppConstant.CDN_SERVER_HOST;
@@ -29,7 +30,7 @@ public class EComAppCDNUrlBuilder {
   }
 
   private String getEComCDNUrlForImages() {
-    return prepareCDNUrl() + "cdn/images/";
+    return prepareCDNUrl() + CDN_IMAGES_LOCATION;
   }
 
   private String getEComCDNUrlForJS() {

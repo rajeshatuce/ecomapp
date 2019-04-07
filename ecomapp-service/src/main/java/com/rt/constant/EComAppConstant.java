@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class EComAppConstant {
 
+  public static final String CDN_WEBROOTPATH = "${cdn.webrootpath}";
   public static final String CDN_SERVER_PROTOCOL = "${cdn.server.protocol}";
   public static final String CDN_SERVER_HOST = "${cdn.server.host}";
   public static final String CDN_SERVER_PORT = "#{new Integer('${cdn.server.port}')}";
@@ -29,6 +30,8 @@ public class EComAppConstant {
   public static final String ROLE_USER = "ROLE_USER";
   public static final String STATUS = "Status";
   public static final String TRUE = "true";
+  public static final String CDN_IMAGES_LOCATION = "cdn/images/";
+  public static final String APP_HOME_SETTING = "APP_HOME_SETTING";
 
   public enum Status implements Serializable {
     Active("Active"),

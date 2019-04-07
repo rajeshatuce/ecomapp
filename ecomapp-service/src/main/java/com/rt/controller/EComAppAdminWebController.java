@@ -1,5 +1,6 @@
 package com.rt.controller;
 
+import static com.rt.constant.EComAppConstant.APP_HOME_SETTING;
 import static com.rt.constant.EComAppConstant.ECOMAPP_ADMIN_HOMEPAGE;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,6 +29,13 @@ public class EComAppAdminWebController {
   private EComAppAdminService eComAppAdminService;
   private ObjectMapper objectMapper = new ObjectMapper();
 
+  /**
+   * Constructor to initialize services required for Admin purpose
+   *
+   * @param eComAppCDNUrlBuilder for CDN
+   * @param eComAppAdminService for Admin functionality
+   * @param ecomAppServiceUtil to create other util service
+   */
   @Autowired
   public EComAppAdminWebController(EComAppCDNUrlBuilder eComAppCDNUrlBuilder,
       EComAppAdminService eComAppAdminService,
@@ -42,6 +50,7 @@ public class EComAppAdminWebController {
     String emailId = ecomAppServiceUtil.getEmailIdFromPrincipalObject(principal);
     LOGGER.info("Rendering Admin homepage for:{}", emailId);
     eComAppCDNUrlBuilder.addCDNUrlToModel(model);
+    model.addAttribute(APP_HOME_SETTING, eComAppAdminService.getOrDefaultHomePageSettings());
     return ECOMAPP_ADMIN_HOMEPAGE;
   }
 }

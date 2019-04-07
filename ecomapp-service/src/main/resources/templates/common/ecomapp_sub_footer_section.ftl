@@ -2,8 +2,8 @@
   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
     <div class="w3-row-padding">
       <div class="w3-col s4">
-        <h4>Contact</h4>
-        <p>Questions? Go ahead.</p>
+        <h4>${APP_HOME_SETTING.contactHeaderText}</h4>
+        <p>${APP_HOME_SETTING.contactSectionText}</p>
         <form action="#" name="customerQueryForm">
           <div class="w3-panel w3-round-xxlarge w3-border" ng-class="customerQueryStatusCSS"
                ng-show="postCustomerQueryStatus">
@@ -29,33 +29,50 @@
       </div>
 
       <div class="w3-col s4">
-        <h4>About</h4>
-        <p><a href="#">About us</a></p>
-        <p><a href="#">We're hiring</a></p>
-        <p><a href="#">Support</a></p>
-        <p><a href="#">Find store</a></p>
-        <p><a href="#">Shipment</a></p>
-        <p><a href="#">Payment</a></p>
-        <p><a href="#">Gift card</a></p>
-        <p><a href="#">Return</a></p>
-        <p><a href="#">Help</a></p>
+        <h4>${APP_HOME_SETTING.aboutHeaderText}</h4>
+        <p><a href="${APP_HOME_SETTING.aboutSectionLink1}">${APP_HOME_SETTING.aboutSectionText1}</a>
+        </p>
+        <p><a href="${APP_HOME_SETTING.aboutSectionLink2}">${APP_HOME_SETTING.aboutSectionText2}</a>
+        </p>
+        <p><a href="${APP_HOME_SETTING.aboutSectionLink3}">${APP_HOME_SETTING.aboutSectionText3}</a>
+        </p>
+        <p><a href="${APP_HOME_SETTING.aboutSectionLink4}">${APP_HOME_SETTING.aboutSectionText4}</a>
+        </p>
+        <p><a href="${APP_HOME_SETTING.aboutSectionLink5}">${APP_HOME_SETTING.aboutSectionText5}</a>
+        </p>
+        <p><a href="${APP_HOME_SETTING.aboutSectionLink6}">${APP_HOME_SETTING.aboutSectionText6}</a>
+        </p>
+        <p><a href="${APP_HOME_SETTING.aboutSectionLink7}">${APP_HOME_SETTING.aboutSectionText7}</a>
+        </p>
+        <p><a href="${APP_HOME_SETTING.aboutSectionLink8}">${APP_HOME_SETTING.aboutSectionText8}</a>
+        </p>
+        <p><a href="${APP_HOME_SETTING.aboutSectionLink9}">${APP_HOME_SETTING.aboutSectionText9}</a>
+        </p>
       </div>
 
       <div class="w3-col s4 w3-justify">
-        <h4>Store</h4>
-        <p><i class="fa fa-fw fa-map-marker"></i> Company Name</p>
-        <p><i class="fa fa-fw fa-phone"></i> 0044123123</p>
-        <p><i class="fa fa-fw fa-envelope"></i> ex@mail.com</p>
-        <h4>We accept</h4>
-        <p><i class="fa fa-fw fa-cc-amex"></i> Amex</p>
-        <p><i class="fa fa-fw fa-credit-card"></i> Credit Card</p>
+        <h4>${APP_HOME_SETTING.storeHeaderText}</h4>
+        <p><i class="fa fa-fw fa-map-marker"></i> ${APP_HOME_SETTING.companyLocation}</p>
+        <p><i class="fa fa-fw fa-phone"></i> ${APP_HOME_SETTING.companyPhoneNumber}</p>
+        <p><i class="fa fa-fw fa-envelope"></i> ${APP_HOME_SETTING.companyEmailId}</p>
+        <h4>${APP_HOME_SETTING.weAcceptHeaderText}</h4>
+        <p><i class="fa fa-fw fa-cc-amex"></i> ${APP_HOME_SETTING.weAccept1}</p>
+        <p><i class="fa fa-fw fa-credit-card"></i> ${APP_HOME_SETTING.weAccept2}</p>
         <br>
-        <i class="fa fa-facebook-official w3-hover-opacity w3-large"></i>
-        <i class="fa fa-instagram w3-hover-opacity w3-large"></i>
-        <i class="fa fa-snapchat w3-hover-opacity w3-large"></i>
-        <i class="fa fa-pinterest-p w3-hover-opacity w3-large"></i>
-        <i class="fa fa-twitter w3-hover-opacity w3-large"></i>
-        <i class="fa fa-linkedin w3-hover-opacity w3-large"></i>
+        <a href="${APP_HOME_SETTING.faceBookLink}" target="_blank"><i
+            class="fa fa-facebook-official w3-hover-opacity w3-large"></i></a>
+        <a href="${APP_HOME_SETTING.instagramLink}" target="_blank"><i
+            class="fa fa-instagram w3-hover-opacity w3-large"></i></a>
+        <a href="${APP_HOME_SETTING.snapchatLink}" target="_blank"><i
+            class="fa fa-snapchat w3-hover-opacity w3-large"></i></a>
+        <a href="${APP_HOME_SETTING.pintrestLink}" target="_blank"><i
+            class="fa fa-pinterest-p w3-hover-opacity w3-large"></i></a>
+        <a href="${APP_HOME_SETTING.twitterLink}" target="_blank"><i
+            class="fa fa-twitter w3-hover-opacity w3-large"></i></a>
+        <a href="${APP_HOME_SETTING.linkedInLink}" target="_blank"><i
+            class="fa fa-linkedin w3-hover-opacity w3-large"></i></a>
+        <a href="${APP_HOME_SETTING.youtubeLink}" target="_blank"><i
+            class="fa fa-youtube-play w3-hover-opacity w3-large"></i></a>
       </div>
     </div>
   </footer>

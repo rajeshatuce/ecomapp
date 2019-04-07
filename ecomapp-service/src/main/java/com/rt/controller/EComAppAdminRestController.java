@@ -3,10 +3,12 @@ package com.rt.controller;
 import static com.rt.constant.EComAppConstant.STATUS;
 import static com.rt.constant.EComAppConstant.TRUE;
 
+import com.rt.model.AppHomeSetting;
 import com.rt.model.Product;
 import com.rt.model.ProductGroup;
 import com.rt.model.UserRoleMapping;
 import com.rt.service.EComAppAdminService;
+import com.rt.service.EComAppFileManagerService;
 import com.rt.util.EcomAppServiceUtil;
 import java.security.Principal;
 import java.util.HashMap;
@@ -18,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,12 +36,14 @@ public class EComAppAdminRestController {
   private static final Logger LOGGER = LoggerFactory.getLogger(EComAppAdminRestController.class);
   private final EComAppAdminService eComAppAdminService;
   private final EcomAppServiceUtil ecomAppServiceUtil;
+  private final EComAppFileManagerService eComAppFileManagerService;
 
   @Autowired
   public EComAppAdminRestController(EComAppAdminService eComAppAdminService,
-      EcomAppServiceUtil ecomAppServiceUtil) {
+      EcomAppServiceUtil ecomAppServiceUtil, EComAppFileManagerService eComAppFileManagerService) {
     this.eComAppAdminService = eComAppAdminService;
     this.ecomAppServiceUtil = ecomAppServiceUtil;
+    this.eComAppFileManagerService = eComAppFileManagerService;
   }
 
   /**
@@ -113,5 +118,44 @@ public class EComAppAdminRestController {
   public List<Product> getAllProducts() {
     LOGGER.info("Fetch all products");
     return eComAppAdminService.getAllProducts();
+  }
+
+  /**
+   * REST API to save home page settings
+   *
+   * @param appHomeSetting to be persisted
+   * @param principal user who is saving the data
+   */
+  @RequestMapping(value = "/admin/saveHomePageSettings", method = RequestMethod.POST)
+  public void saveHomePageSettings(@ModelAttribute AppHomeSetting appHomeSetting,
+      Principal principal) throws Exception {
+    String emailId = ecomAppServiceUtil.getEmailIdFromPrincipalObject(principal);
+    LOGGER.info("Home page setting is getting saved by user: {}", emailId);
+    //1. Save image if any uploaded onto image CDN
+    if (appHomeSetting.getAppSubHeaderNewImageFile() != null) {//New image uploaded by user
+      appHomeSetting.setAppSubHeaderImageFileName(eComAppFileManagerService.saveImagesToCDNLocation(
+          appHomeSetting
+              .getAppSubHeaderNewImageFile()));//Save new file at CDN and update name at app metadata
+    }
+    //2. Add/Update HomePageSetting data
+    appHomeSetting.setModifiedDate(DateTime.now(DateTimeZone.UTC));
+    appHomeSetting.setModifiedBy(emailId);
+    if (appHomeSetting.getId() != null && appHomeSetting.getId().length() == 0) {
+      appHomeSetting.setId(null);
+    }
+    eComAppAdminService.saveAppHomeSetting(appHomeSetting);
+  }
+
+  /**
+   * REST API to fetch home page settings
+   *
+   * @param principal who is requesting details
+   * @return AppHomeSetting
+   */
+  @RequestMapping(value = "/admin/getHomePageSettings", method = RequestMethod.GET)
+  public AppHomeSetting getHomePageSettings(Principal principal) {
+    String emailId = ecomAppServiceUtil.getEmailIdFromPrincipalObject(principal);
+    LOGGER.info("Home page setting is fetched by user: {}", emailId);
+    return eComAppAdminService.getOrDefaultHomePageSettings();
   }
 }

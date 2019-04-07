@@ -1,6 +1,7 @@
 package com.rt.controller;
 
 import static com.rt.constant.EComAppConstant.ACTIVE_PRODUCTS;
+import static com.rt.constant.EComAppConstant.APP_HOME_SETTING;
 import static com.rt.constant.EComAppConstant.ECOMAPP_CHECKOUT_PAGE;
 import static com.rt.constant.EComAppConstant.ECOMAPP_HOMEPAGE;
 import static com.rt.constant.EComAppConstant.ECOMAPP_MY_ORDERS_PAGE;
@@ -12,6 +13,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rt.constant.EComAppConstant.PaymentType;
 import com.rt.model.ProductSelected;
+import com.rt.service.EComAppAdminService;
 import com.rt.service.EComAppService;
 import com.rt.util.EComAppCDNUrlBuilder;
 import com.rt.util.EcomAppServiceUtil;
@@ -38,20 +40,35 @@ public class EComAppWebController {
   private EComAppService eComAppService;
   private ObjectMapper objectMapper = new ObjectMapper();
   private final EcomAppServiceUtil ecomAppServiceUtil;
+  private final EComAppAdminService eComAppAdminService;
 
+  /**
+   * Constructor for the Web Controller
+   *
+   * @param eComAppCDNUrlBuilder to create
+   * @param eComAppService to create
+   * @param ecomAppServiceUtil to create
+   */
   @Autowired
   public EComAppWebController(EComAppCDNUrlBuilder eComAppCDNUrlBuilder,
       EComAppService eComAppService,
-      EcomAppServiceUtil ecomAppServiceUtil) {
+      EcomAppServiceUtil ecomAppServiceUtil, EComAppAdminService eComAppAdminService) {
     this.eComAppCDNUrlBuilder = eComAppCDNUrlBuilder;
     this.eComAppService = eComAppService;
     this.ecomAppServiceUtil = ecomAppServiceUtil;
+    this.eComAppAdminService = eComAppAdminService;
   }
 
+  /**
+   * Function to be called when opening home page for the app
+   * @param model which we need to set so the FTL can pickup data from there
+   * @return FTL page name which need to be rendered
+   */
   @RequestMapping("/")
   public String getEComAppIndexPage(Model model) {
     LOGGER.info("Rendering homepage");
     eComAppCDNUrlBuilder.addCDNUrlToModel(model);
+    model.addAttribute(APP_HOME_SETTING, eComAppAdminService.getOrDefaultHomePageSettings());
     model.addAttribute(ACTIVE_PRODUCTS, eComAppService.getActiveProducts());
     return ECOMAPP_HOMEPAGE;
   }
@@ -62,6 +79,7 @@ public class EComAppWebController {
     String emailId = ecomAppServiceUtil.getEmailIdFromPrincipalObject(user);
     LOGGER.info("Rendering checkout page for customer:{}", emailId);
     eComAppCDNUrlBuilder.addCDNUrlToModel(model);
+    model.addAttribute(APP_HOME_SETTING, eComAppAdminService.getOrDefaultHomePageSettings());
     List<ProductSelected> productsSelected = objectMapper
         .readValue(shoppingCartValue, new TypeReference<List<ProductSelected>>() {
         });
@@ -81,6 +99,7 @@ public class EComAppWebController {
     String emailId = ecomAppServiceUtil.getEmailIdFromPrincipalObject(user);
     LOGGER.info("creating order for customer:{}", emailId);
     eComAppCDNUrlBuilder.addCDNUrlToModel(model);
+    model.addAttribute(APP_HOME_SETTING, eComAppAdminService.getOrDefaultHomePageSettings());
     List<ProductSelected> productsSelected = objectMapper
         .readValue(productsToPlaceOrder, new TypeReference<List<ProductSelected>>() {
         });
@@ -94,8 +113,9 @@ public class EComAppWebController {
 
   @RequestMapping("/myOrders")
   public String getEComAppMyOrdersPage(Model model) {
-    eComAppCDNUrlBuilder.addCDNUrlToModel(model);
     LOGGER.info("Rendering my orders page");
+    eComAppCDNUrlBuilder.addCDNUrlToModel(model);
+    model.addAttribute(APP_HOME_SETTING, eComAppAdminService.getOrDefaultHomePageSettings());
     return ECOMAPP_MY_ORDERS_PAGE;
   }
 
@@ -105,6 +125,7 @@ public class EComAppWebController {
     eComAppCDNUrlBuilder.addCDNUrlToModel(model);
     String emailId = ecomAppServiceUtil.getEmailIdFromPrincipalObject(user);
     LOGGER.info("Rendering details for order ID : {}, for customer: {}", orderId, emailId);
+    model.addAttribute(APP_HOME_SETTING, eComAppAdminService.getOrDefaultHomePageSettings());
     model.addAttribute(ORDER, eComAppService
         .fetchOrderForCustomer(orderId, emailId));
     model.addAttribute(ORDER_PAGE, true);

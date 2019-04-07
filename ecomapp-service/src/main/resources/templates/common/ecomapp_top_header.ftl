@@ -1,6 +1,10 @@
 <#macro ecomapp_top_header>
   <header class="fixed-top w3-container w3-xlarge w3-border-bottom">
-    <div class="w3-col s4 w3-center"><p class="w3-left"><b>LOGO</b></p></div>
+    <div class="w3-col s4 w3-center"><p class="w3-left"><a class="noUnderline"
+                                                           title="${APP_HOME_SETTING.appLogoText}"
+                                                           target="_blank"
+                                                           href="${APP_HOME_SETTING.appLogoTextLink}"><b>${APP_HOME_SETTING.appLogoText}</b></a>
+    </p></div>
     <div class="w3-col s4 w3-center"><p><input id="search" class="ecom-search" type="text"
                                                name="search" placeholder="Search..">
       <i class="fa fa-search w3-hover-opacity"></i></p>
@@ -61,8 +65,6 @@
                     <div class="w3-col s3 w3-padding-small">
                       <span class="w3-small">{{shoppingCart.currencyLabel}} {{x.subTotal}}</span>
                     </div>
-
-
                   </li>
                 </ul>
               </div>
@@ -70,8 +72,10 @@
             <div class="w3-row w3-right">
               <form id="shoppingCartForm" action="/checkout" method="get">
                 <input id="shoppingCartValue" name="shoppingCartValue" type="hidden" value=""/>
+                <span class="w3-small">Click Here<i
+                    class="fa fa-hand-o-right marginLeft2Px"></i> </span>
                 <button type="button" class="payment_button" ng-click="checkoutShoppingCart()">
-                  <span>Rs. {{shoppingCart.total}}</span></button>
+                  <span>{{shoppingCart.currencyLabel}} {{shoppingCart.total}}</span></button>
               </form>
             </div>
           </div>

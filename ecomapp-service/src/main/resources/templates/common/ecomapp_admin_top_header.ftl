@@ -1,6 +1,10 @@
 <#macro ecomapp_admin_top_header>
   <header class="fixed-top w3-container w3-xlarge w3-border-bottom">
-    <div class="w3-col s8 w3-center"><p class="w3-left"><b>LOGO</b></p></div>
+    <div class="w3-col s8 w3-center"><p class="w3-left"><a class="noUnderline"
+                                                           title="${APP_HOME_SETTING.appLogoText}"
+                                                           target="_blank"
+                                                           href="${APP_HOME_SETTING.appLogoTextLink}"><b>${APP_HOME_SETTING.appLogoText}</b></a>
+    </p></div>
     <div class="w3-col s4 w3-right topRightMenuPositionFix">
       <div class="w3-right header-rightdiv">
         <div class="dropdown" style="display:inline;">
