@@ -277,3 +277,12 @@ input.ecom-search[type=text]:focus {
 .marginLeft2Px {
   margin-left: 2px;
 }
+
+/* Admin CSS*/
+.adminMenuWidth {
+  width: 130px !important;
+}
+
+.adminBodyMarginLeft {
+  margin-left: 130px !important;
+}

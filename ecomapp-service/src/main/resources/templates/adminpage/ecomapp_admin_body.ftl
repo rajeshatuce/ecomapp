@@ -1,6 +1,6 @@
 <#import "ecomapp_setting_home.ftl" as setting_home>
 <#macro ecomapp_admin_body>
-      <div class="w3-sidebar w3-bar-block w3-black w3-card" style="width:130px">
+      <div class="w3-sidebar w3-bar-block w3-black w3-card adminMenuWidth">
         <h5 class="w3-bar-item">Menu</h5>
         <button class="w3-bar-item w3-button tablink" ng-class="showHomePage ? 'w3-red': 'w3-black'"
                 ng-click="showHomePage=true;showProducts=false;showOrders=false;showCustomerQuery=false;">
@@ -21,7 +21,7 @@
         </button>
       </div>
 
-      <div style="margin-left:130px">
+      <div class="adminBodyMarginLeft">
         <div id="Home_Page" class="w3-container city w3-animate-opacity" ng-show="showHomePage">
           <!-- Home setting form below-->
           <@setting_home.ecomapp_setting_home/>
