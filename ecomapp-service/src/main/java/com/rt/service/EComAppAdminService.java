@@ -1,5 +1,6 @@
 package com.rt.service;
 
+import com.rt.constant.EComAppConstant.UserRole;
 import com.rt.model.AppHomeSetting;
 import com.rt.model.Product;
 import com.rt.model.ProductGroup;
@@ -9,6 +10,10 @@ import com.rt.repository.ProductGroupsRepository;
 import com.rt.repository.ProductsRepository;
 import com.rt.repository.UserRoleMappingRepository;
 import java.util.List;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +23,7 @@ import org.springframework.stereotype.Service;
  */
 public class EComAppAdminService {
 
+  private static final Logger LOGGER = LoggerFactory.getLogger(EComAppAdminService.class);
   private final ProductGroupsRepository productGroupsRepository;
   private final ProductsRepository productsRepository;
   private final UserRoleMappingRepository userRoleMappingRepository;
@@ -165,6 +171,44 @@ public class EComAppAdminService {
    */
   public void saveAppHomeSetting(AppHomeSetting appHomeSetting) {
     appHomeSettingRepository.save(appHomeSetting);
+  }
+
+  /**
+   * Service to check and assign Admin role to user if not present in system
+   *
+   * @param userEmailId to assign admin role
+   */
+  public void checkAndAssignAdminRoleToUserIfNotPresentInSystem(String userEmailId) {
+    List<UserRoleMapping> currentRoleForUser = findRolesForUser(userEmailId);
+    if (currentRoleForUser == null || currentRoleForUser.size() == 0 || !checkUserForAdminRole(
+        userEmailId, currentRoleForUser)) {//If user does not have admin role then create
+      UserRoleMapping userRoleMapping = new UserRoleMapping();
+      userRoleMapping.setEmailId(userEmailId);
+      userRoleMapping.setUserRole(UserRole.ROLE_ADMIN);
+      userRoleMapping.setCreateDate(DateTime.now(DateTimeZone.UTC));
+      userRoleMapping.setCreatedBy(userEmailId);
+      userRoleMappingRepository.save(userRoleMapping);//Save Admin role
+      LOGGER.info("ROLE_ADMIN assigned to user: {}", userEmailId);
+    } else {//user already marked for admin role
+      LOGGER.info("ROLE_ADMIN already associated with user: {}", userEmailId);
+    }
+  }
+
+  /**
+   * Utility API to check whether current user has admin role
+   *
+   * @param userEmailId to check for admin role
+   * @param currentRoleForUser list of role
+   * @return boolean
+   */
+  private boolean checkUserForAdminRole(String userEmailId,
+      List<UserRoleMapping> currentRoleForUser) {
+    for (UserRoleMapping roleMapping : currentRoleForUser) {
+      if (roleMapping.getUserRole().equals(UserRole.ROLE_ADMIN)) {
+        return true;
+      }
+    }
+    return false;
   }
 
 }
