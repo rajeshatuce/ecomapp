@@ -278,6 +278,10 @@ input.ecom-search[type=text]:focus {
   margin-left: 2px;
 }
 
+.breakWord {
+  word-wrap: break-word;
+}
+
 /* Admin CSS*/
 .adminMenuWidth {
   width: 130px !important;

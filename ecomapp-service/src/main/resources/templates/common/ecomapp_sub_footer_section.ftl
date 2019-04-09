@@ -1,7 +1,7 @@
 <#macro ecomapp_sub_footer_section>
   <footer class="w3-padding-64 w3-light-grey w3-small w3-center" id="footer">
     <div class="w3-row-padding">
-      <div class="w3-col s4">
+      <div class="w3-col s4 breakWord">
         <h4>${APP_HOME_SETTING.contactHeaderText}</h4>
         <p>${APP_HOME_SETTING.contactSectionText}</p>
         <form action="#" name="customerQueryForm">
@@ -28,7 +28,7 @@
         </form>
       </div>
 
-      <div class="w3-col s4">
+      <div class="w3-col s4 breakWord">
         <h4>${APP_HOME_SETTING.aboutHeaderText}</h4>
         <p><a href="${APP_HOME_SETTING.aboutSectionLink1}">${APP_HOME_SETTING.aboutSectionText1}</a>
         </p>
@@ -50,7 +50,7 @@
         </p>
       </div>
 
-      <div class="w3-col s4 w3-justify">
+      <div class="w3-col s4 w3-justify breakWord">
         <h4>${APP_HOME_SETTING.storeHeaderText}</h4>
         <p><i class="fa fa-fw fa-map-marker"></i> ${APP_HOME_SETTING.companyLocation}</p>
         <p><i class="fa fa-fw fa-phone"></i> ${APP_HOME_SETTING.companyPhoneNumber}</p>
