@@ -45,9 +45,19 @@ public class EComAppAdminService {
    * @param productGroup to be added
    * @return boolean status
    */
-  public boolean addProductGroups(ProductGroup productGroup) {
+  public boolean saveProductGroups(ProductGroup productGroup) {
     productGroupsRepository.save(productGroup);
     return true;
+  }
+
+  /**
+   * Service to fetch productgroup for ID
+   *
+   * @param productGroupId to find product
+   * @return ProductGroup
+   */
+  public ProductGroup getProductGroup(String productGroupId) {
+    return productGroupsRepository.findOne(productGroupId);
   }
 
   /**

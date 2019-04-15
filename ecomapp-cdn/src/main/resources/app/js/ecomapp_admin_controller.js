@@ -78,6 +78,11 @@ adminApp.controller('ecomappAdminCtrl', function ($http, $scope) {
   $scope.appHomeSetting.modifiedBy = "";
   $scope.appHomeSetting.modifiedDateFormatted = "";
 
+  $scope.productGroupSetting = [];
+  $scope.editProductGroup = {};
+  $scope.editProductGroup.id = undefined;
+  $scope.editProductGroup.productGroup = "";
+  $scope.editProductGroup.status = "Active";
   /***************************************** Event function Home Page**********************************/
   //API to fetch homepage setting on load
   $scope.getHomePageSettings = function () {
@@ -136,6 +141,57 @@ adminApp.controller('ecomappAdminCtrl', function ($http, $scope) {
           console.log(response);
           $scope.showLoadingOverlay = false;//Unmask window
         });
+    event.preventDefault();
+  };
+
+  //Method to fetch all product group
+  $scope.fetchAllProductGroup = function () {
+    $http.get("/admin/getAllProductGroups")
+    .then(function (response) {
+      $scope.productGroupSetting = response.data;
+      for (var i = 0; i < $scope.productGroupSetting.length; i++) {
+        let dt = new Date($scope.productGroupSetting[i].createDate.millis);
+        $scope.productGroupSetting[i].createDateFormatted = dt.toLocaleString();
+        if ($scope.productGroupSetting[i].modifiedDate != undefined) {
+          let dt1 = new Date($scope.productGroupSetting[i].modifiedDate.millis);
+          $scope.productGroupSetting[i].modifiedDateFormatted = dt1.toLocaleString();
+        }
+      }
+    });
+  };
+  //Method to edit product group
+  $scope.editProductGroupFns = function (productGroupId) {
+    for (var i = 0; i < $scope.productGroupSetting.length; i++) {
+      if ($scope.productGroupSetting[i].id === productGroupId) {
+        $scope.editProductGroup.id = $scope.productGroupSetting[i].id;
+        $scope.editProductGroup.productGroup = $scope.productGroupSetting[i].productGroup;
+        $scope.editProductGroup.status = $scope.productGroupSetting[i].status;
+        break;
+      }
+    }
+  };
+  //Method to reset product group form
+  $scope.resetProductGroupForm = function (event) {
+    $scope.editProductGroup.id = undefined;
+    $scope.editProductGroup.productGroup = "";
+    $scope.editProductGroup.status = "Active";
+    event.preventDefault();
+  };
+
+  //Method to save productgroup form
+  $scope.saveProductGroup = function (event) {
+    $http.post('/admin/saveProductGroup', $scope.editProductGroup, {
+          headers: {
+            'Accept': 'application/json;odata=verbose'
+          }
+        }
+    ).then(function (result) {
+      $scope.fetchAllProductGroup();//refresh product group table
+      $scope.resetProductGroupForm(event);//reset product group form
+    }, function (error) {
+      console.log('Error:');
+      console.log(error);
+    });
     event.preventDefault();
   };
 });

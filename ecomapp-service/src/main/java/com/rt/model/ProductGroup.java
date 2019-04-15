@@ -1,5 +1,6 @@
 package com.rt.model;
 
+import com.rt.constant.EComAppConstant.Status;
 import org.joda.time.DateTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,6 +14,7 @@ public class ProductGroup {
   @Id
   private String id;
   private String productGroup;
+  private Status status;
   private DateTime createDate;
   private DateTime modifiedDate;
   private String createdBy;
@@ -68,5 +70,13 @@ public class ProductGroup {
 
   public void setModifiedBy(String modifiedBy) {
     this.modifiedBy = modifiedBy;
+  }
+
+  public Status getStatus() {
+    return status;
+  }
+
+  public void setStatus(Status status) {
+    this.status = status;
   }
 }

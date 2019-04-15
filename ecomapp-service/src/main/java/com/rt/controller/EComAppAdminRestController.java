@@ -67,18 +67,26 @@ public class EComAppAdminRestController {
   }
 
   /**
-   * REST service to add product group to DB
+   * REST service to save product group to DB
    *
    * @param productGroup document
    * @param user who is adding the productGroup
    * @return boolean status
    */
-  @RequestMapping(value = "/admin/addProductGroup", method = RequestMethod.POST)
-  public boolean addProductGroup(@RequestBody ProductGroup productGroup, Principal user) {
-    LOGGER.info("Adding product group");
-    productGroup.setCreatedBy(ecomAppServiceUtil.getEmailIdFromPrincipalObject(user));
-    productGroup.setCreateDate(DateTime.now(DateTimeZone.UTC));
-    eComAppAdminService.addProductGroups(productGroup);
+  @RequestMapping(value = "/admin/saveProductGroup", method = RequestMethod.POST)
+  public boolean saveProductGroup(@RequestBody ProductGroup productGroup, Principal user) {
+    LOGGER.info("Saving product group");
+    if (productGroup.getId() == null) {
+      productGroup.setCreatedBy(ecomAppServiceUtil.getEmailIdFromPrincipalObject(user));
+      productGroup.setCreateDate(DateTime.now(DateTimeZone.UTC));
+    } else {
+      ProductGroup oldProductGroup = eComAppAdminService.getProductGroup(productGroup.getId());
+      productGroup.setCreateDate(oldProductGroup.getCreateDate());
+      productGroup.setCreatedBy(oldProductGroup.getCreatedBy());
+      productGroup.setModifiedBy(ecomAppServiceUtil.getEmailIdFromPrincipalObject(user));
+      productGroup.setModifiedDate(DateTime.now(DateTimeZone.UTC));
+    }
+    eComAppAdminService.saveProductGroups(productGroup);
     return true;
   }
 
