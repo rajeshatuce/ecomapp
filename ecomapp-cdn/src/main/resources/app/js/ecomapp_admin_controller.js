@@ -83,6 +83,9 @@ adminApp.controller('ecomappAdminCtrl', function ($http, $scope) {
   $scope.editProductGroup.id = undefined;
   $scope.editProductGroup.productGroup = "";
   $scope.editProductGroup.status = "Active";
+
+  //products Admin Page
+  $scope.products = [];
   /***************************************** Event function Home Page**********************************/
   //API to fetch homepage setting on load
   $scope.getHomePageSettings = function () {
@@ -193,5 +196,32 @@ adminApp.controller('ecomappAdminCtrl', function ($http, $scope) {
       console.log(error);
     });
     event.preventDefault();
+  };
+
+  //Method to fetch all products
+  $scope.fetchAllProducts = function (pageNumber, pageSize) {
+    $scope.productsCurrentPageNumber = "" + pageNumber;
+    let pageNumberToSendToServer = pageNumber - 1;
+    $http.get("/admin/getAllProducts?pageNumber=" + pageNumberToSendToServer
+        + "&pageSize=" + pageSize)
+    .then(function (response) {
+      for (i = 0; i < response.data.content.length; i++) {
+        let d = new Date(response.data.content[i].createDate.millis);
+        response.data.content[i].createDateFormatted = d.toLocaleString();
+        if (response.data.content[i].modifiedDate != undefined) {
+          let d1 = new Date(response.data.content[i].modifiedDate.millis);
+          response.data.content[i].modifiedDateFormatted = d1.toLocaleString();
+        }
+        for (j = 0; j < response.data.content[i].productPictures.length; j++) {
+          if (response.data.content[i].productPictures[j].productThumbNail) {
+            response.data.content[i].productThumbNailLink = document.getElementById(
+                "cdnIMGURL").value
+                + response.data.content[i].productPictures[j].uniqueFileName;
+          }
+        }
+      }
+      $scope.products = response.data.content;
+      $scope.productsTotalPages = response.data.totalPages;
+    });
   };
 });

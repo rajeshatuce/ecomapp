@@ -1,5 +1,6 @@
 <#import "ecomapp_setting_home.ftl" as setting_home>
 <#import "ecomapp_setting_productGroup.ftl" as setting_productgroup>
+<#import "ecomapp_setting_products.ftl" as setting_products>
 
 <#macro ecomapp_admin_body>
       <div class="w3-sidebar w3-bar-block w3-black w3-card adminMenuWidth">
@@ -43,7 +44,8 @@
           <@setting_productgroup.ecomapp_setting_productGroup/>
         </div>
         <div id="Products" class="w3-container city w3-animate-left" ng-show="showProducts">
-          <p>Test</p>
+          <!-- Products setting below-->
+          <@setting_products.ecomapp_setting_products/>
         </div>
 
         <div id="Orders" class="w3-container city w3-animate-top" ng-show="showOrders">

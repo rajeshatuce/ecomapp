@@ -1,5 +1,7 @@
 package com.rt.service;
 
+import static com.rt.constant.EComAppConstant.PRODUCT_NAME;
+
 import com.rt.constant.EComAppConstant.UserRole;
 import com.rt.model.AppHomeSetting;
 import com.rt.model.Product;
@@ -15,6 +17,9 @@ import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -79,10 +84,12 @@ public class EComAppAdminService {
 
   /**
    * Service to view all product irrespective of status
-   * @return List<Product>
+   * @return Page<Product>
    */
-  public List<Product> getAllProducts() {
-    return productsRepository.findAll();
+  public Page<Product> getAllProducts(int pageNumber, int pageSize) {
+    PageRequest pageRequest = new PageRequest(pageNumber, pageSize, new Sort(Sort.Direction.ASC,
+        PRODUCT_NAME));
+    return productsRepository.findAll(pageRequest);
   }
 
   /**

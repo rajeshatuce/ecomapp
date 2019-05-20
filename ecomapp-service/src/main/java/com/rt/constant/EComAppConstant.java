@@ -28,6 +28,7 @@ public class EComAppConstant {
   public static final String SHOPPING_CART_VALUE = "SHOPPING_CART_VALUE";
   public static final String ORDER_PAGE = "ORDER_PAGE";
   public static final String CREATE_DATE = "createDate";
+  public static final String PRODUCT_NAME = "name";
   public static final String ROLE_USER = "ROLE_USER";
   public static final String STATUS = "Status";
   public static final String TRUE = "true";

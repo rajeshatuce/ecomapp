@@ -19,11 +19,13 @@ import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -123,9 +125,11 @@ public class EComAppAdminRestController {
    * @return List<Product>
    */
   @RequestMapping(value = "/admin/getAllProducts", method = RequestMethod.GET)
-  public List<Product> getAllProducts() {
-    LOGGER.info("Fetch all products");
-    return eComAppAdminService.getAllProducts();
+  public Page<Product> getAllProducts(
+      @RequestParam(value = "pageNumber", defaultValue = "0") Integer pageNumber,
+      @RequestParam(value = "pageSize", defaultValue = "50") Integer pageSize) {
+    LOGGER.info("Fetch all products for pageNumber: {}, pageSize: {}", pageNumber, pageSize);
+    return eComAppAdminService.getAllProducts(pageNumber, pageSize);
   }
 
   /**
